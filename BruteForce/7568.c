@@ -4,6 +4,8 @@
 #pragma warning(disable:4996) 
 #pragma warning(disable:4477) 
 
+// https://www.acmicpc.net/problem/7568
+
 int main() {
 
 	int NumberofPeople;
