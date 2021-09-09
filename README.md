@@ -1,3 +1,3 @@
 # C
 
-study Algorithms and solve problems with C
+Study algorithms and solve problems with C
