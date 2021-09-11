@@ -22,6 +22,8 @@
 
 /*
 Using Stack , LET'S SOLVE N-QUEEN
+
+Problem- Line 234, 243, 254, 255 
 */
 
 typedef struct _QueenCorrdinate {
@@ -35,22 +37,19 @@ typedef struct _ChessBoard {
 
  typedef struct _Node {
 	 Cor *Corrdinate; // 퀸의 위치
-	 int QueenIndex; // 퀸이 놓아진 순서. 3번째 퀸.. 이런것 
+	 ChessBoard *NodeChessBoard; // 체스보드 
+	 struct _Node *BeforeThisQueen; // 다음 퀸 노드 
 	 int AbleLocationArray_y[WIDTH]; // 체스보드를 기준으로 한 행에서 0인 지점의 위치를 저장하는 곳. 그냥 퀸이 놓일수 있는 가능한 위치를 나열한 배열이다. 
 	 int y_index; // y 위치 변수. 
 	 int max_y_index; // 가능한 y 위치 총 개수
-	 struct _Node *BeforeThisQueen; // 다음 퀸 노드 
-	 ChessBoard *NodeChessBoard;
 } Node;
 
  typedef struct _Stack {
 	 Node *Top; // 가장 나중에 배치된 퀸
 	 Node *First; // 가장 먼저 배치된 퀸
-
+	 ChessBoard *CurrentChessBoard; // 퀸이 배치될때마다 보드판 새로 그림
 	 int AbleQueenCount; // 퀸이 제대로 전부다 배치될때마다 queencount++
-
-	 ChessBoard *CurrentChessBoard; // 퀸이 배치될때마다 보드판 새로 그림 
-	
+	 int QueenIndex; // 퀸이 들어올때마다 +1씩 
 	 int QueenAbleCoordinatesArray[LENGTH][2]; // 지금까지 배치된 퀸의 좌표들을 저장. 나중에 들어올 퀸의 좌표에 범위가 닿는지 안닿는지 검사하는 용도 
  } Stack;
 
@@ -65,7 +64,6 @@ void BoardClear(Stack *stack, int NumberofQueen) {
 			stack->CurrentChessBoard->BoardState[i][j] = NOTINRANGE;
 		 }
 	 }
-
  }
 
 // 디버깅용 함수 
@@ -84,6 +82,7 @@ void printBoard(Stack *stack, int NumberofQueen) {
 	 stack->Top = NULL;
 	 stack->First = NULL;
 	 stack->CurrentChessBoard = (ChessBoard*)malloc(sizeof(ChessBoard));
+	 stack->QueenIndex = 0; 
 	BoardClear(stack, NumberofQueen);
  }
 
@@ -145,13 +144,14 @@ int setQueen(Stack *stack, int NumberofQueen) {
 
 		// 일단 퀸을 놓기 위한 노드생성 
 		Node *NewQueen = (Node*)malloc(sizeof(Node));
-		memset(NewQueen, 0, sizeof(Node));
+		memset(NewQueen, -1, sizeof(Node));
 
 		// 무조건 맨 처음 퀸은 0,y에서 시작할 것이다 
 		NewQueen->Corrdinate = (Cor*)malloc(sizeof(Cor));
 		NewQueen->Corrdinate->x = 0;
 		// nullptr참조오류 
 		// 그럼 이걸 뭐 어떻게든 값을 넣어줘야한다는 소리인데...?
+		// NewQueen->Corrdinate = (Cor*)malloc(sizeof(Cor)); 로 해결..?
 
 
 		// 일단 0부터 입력된 퀸 수-1 만큼 배열에 넣는다. 어차피 첫줄은 모든 y값이 가능하니까, 0번은 0, 1번은 1... 
@@ -180,7 +180,7 @@ int setQueen(Stack *stack, int NumberofQueen) {
 
 		// 맨 처음에 한해서, 완전 초기상태, 백지상태 보드를 저장하기위한 노드를 따로 만든다. 
 		Node *SaveNullBoard = (Node*)malloc(sizeof(Node));
-		//memset(SaveNullBoard, 0, sizeof(Node));
+		memset(SaveNullBoard, 0, sizeof(Node));
 
 		SaveNullBoard->NodeChessBoard = stack->CurrentChessBoard;
 
@@ -201,6 +201,9 @@ int setQueen(Stack *stack, int NumberofQueen) {
 
 		// 그 범위가 그려진 체스보드를 첫번쨰 노드에 담아주자 
 		NewQueen->NodeChessBoard = stack->CurrentChessBoard;
+
+		stack->QueenIndex++;
+
 	}
 	else {  // 만약 퀸이 첫번쨰로 놓아진게 아니라면..
 
@@ -208,11 +211,13 @@ int setQueen(Stack *stack, int NumberofQueen) {
 
 		// 퀸 노드생성 
 		Node *NewQueen = (Node*)malloc(sizeof(Node));
-		memset(NewQueen, 0, sizeof(Node));
+		memset(NewQueen, -1, sizeof(Node));
 
 		// 3. 만약 이번 x행을 처음으로 조사하면, 현재 보드판을 가져오고, 이번 x번째 행에서 0인지점을 모두 차례대로 저장한다. 이 동작은 그 행의 노드가 삭제되기 전까지는 한번만 실행된다. 
-		if ((*stack->QueenAbleCoordinatesArray)[stack->Top->Corrdinate->x+1] == 0) {
+		// 즉 이게 뭔말이냐 하면 퀸이 현재 이 행에 놓여있지 않다는 뜻
+		if (stack->Top->Corrdinate->x == stack->QueenIndex - 1) {
 			int index = 0;
+			// w
 
 			for (int width = 0; width < NumberofQueen; width++) {
 				if (stack->CurrentChessBoard->BoardState[stack->Top->Corrdinate->x + 1][width] != 1) {
@@ -227,7 +232,7 @@ int setQueen(Stack *stack, int NumberofQueen) {
 			NewQueen->max_y_index = index;
 		}
 
-		// 4. 만약 선택할 0이 없을 경우, 전 노드로 돌아간다. 
+		// 4. 만약 선택할 0이 없을 경우, 전 노드로 돌아간다. **************여기 수정만 하면 될듯 
 		if (NewQueen->AbleLocationArray_y[NewQueen->y_index] == NULL) {
 
 			// 퀸을 놓을 수 없으므로 free해준다. 
@@ -245,8 +250,15 @@ int setQueen(Stack *stack, int NumberofQueen) {
 				Node *DeleteQueen = stack->Top;
 
 				// 그 퀸 노드가 갖고있던 데이터들이 스택에 들어간걸 초기화 시켜줘야함
+
+
+
 				stack->QueenAbleCoordinatesArray[stack->Top->Corrdinate->x][X] = NULL;
 				stack->QueenAbleCoordinatesArray[stack->Top->Corrdinate->x][Y] = NULL;
+
+				//(*stack->QueenAbleCoordinatesArray[stack->Top->Corrdinate->x]) = NULL;
+
+
 
 				// 스택 top의 위치를 변경해준다. 
 				stack->Top = stack->Top->BeforeThisQueen;
@@ -258,6 +270,8 @@ int setQueen(Stack *stack, int NumberofQueen) {
 				// 위에서 0번째 행 전에도 노드를 하나 만듦으로써 만약 0번쨰 행의 Y위치가 바뀔때도 마찬가지로 오류없이 작동되도록 했다. 
 				stack->CurrentChessBoard = stack->Top->BeforeThisQueen->NodeChessBoard;
 
+				stack->QueenIndex--;
+
 				// 이제 보내주자..
 				free(DeleteQueen);
 			}
@@ -268,6 +282,8 @@ int setQueen(Stack *stack, int NumberofQueen) {
 			// 이거 쓰긴 하냐>?? 
 
 			// 새 퀸의 x값은 그 전 퀸의 x값+1이다. 		
+			NewQueen->Corrdinate = (Cor*)malloc(sizeof(Cor));
+
 			NewQueen->Corrdinate->x = stack->Top->Corrdinate->x + 1;
 
 			// 새 퀸 노드를 그전에 놓아진 퀸 노드와 연결해준다. 
@@ -277,6 +293,7 @@ int setQueen(Stack *stack, int NumberofQueen) {
 			if (NewQueen->Corrdinate->x == NumberofQueen - 1) {
 				stack->AbleQueenCount++;
 			}
+			//TODO 이거 맨 처음 경우에 추가할것 퀸이 한개일수도 있음 
 
 			// 이제 좌표 등록하고 
 			NewQueen->Corrdinate->y = NewQueen->AbleLocationArray_y[NewQueen->y_index];
@@ -292,6 +309,8 @@ int setQueen(Stack *stack, int NumberofQueen) {
 
 			// 보드 등록하고 
 			NewQueen->NodeChessBoard = stack->CurrentChessBoard;
+
+			stack->QueenIndex++;
 
 		}
 	}
