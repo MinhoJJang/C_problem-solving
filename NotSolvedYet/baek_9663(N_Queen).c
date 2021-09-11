@@ -27,8 +27,8 @@ Problem- Line 234, 243, 254, 255
 */
 
 typedef struct _QueenCorrdinate {
-	int x; // Çà
-	int y; // ·Ä
+	int x; // í–‰
+	int y; // ë ¬
 } Cor;
 
 typedef struct _ChessBoard {
@@ -36,24 +36,24 @@ typedef struct _ChessBoard {
 } ChessBoard;
 
  typedef struct _Node {
-	 Cor *Corrdinate; // ÄıÀÇ À§Ä¡
-	 ChessBoard *NodeChessBoard; // Ã¼½ºº¸µå 
-	 struct _Node *BeforeThisQueen; // ´ÙÀ½ Äı ³ëµå 
-	 int AbleLocationArray_y[WIDTH]; // Ã¼½ºº¸µå¸¦ ±âÁØÀ¸·Î ÇÑ Çà¿¡¼­ 0ÀÎ ÁöÁ¡ÀÇ À§Ä¡¸¦ ÀúÀåÇÏ´Â °÷. ±×³É ÄıÀÌ ³õÀÏ¼ö ÀÖ´Â °¡´ÉÇÑ À§Ä¡¸¦ ³ª¿­ÇÑ ¹è¿­ÀÌ´Ù. 
-	 int y_index; // y À§Ä¡ º¯¼ö. 
-	 int max_y_index; // °¡´ÉÇÑ y À§Ä¡ ÃÑ °³¼ö
+	 Cor *Corrdinate; // í€¸ì˜ ìœ„ì¹˜
+	 ChessBoard *NodeChessBoard; // ì²´ìŠ¤ë³´ë“œ 
+	 struct _Node *BeforeThisQueen; // ë‹¤ìŒ í€¸ ë…¸ë“œ 
+	 int AbleLocationArray_y[WIDTH]; // ì²´ìŠ¤ë³´ë“œë¥¼ ê¸°ì¤€ìœ¼ë¡œ í•œ í–‰ì—ì„œ 0ì¸ ì§€ì ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥í•˜ëŠ” ê³³. ê·¸ëƒ¥ í€¸ì´ ë†“ì¼ìˆ˜ ìˆëŠ” ê°€ëŠ¥í•œ ìœ„ì¹˜ë¥¼ ë‚˜ì—´í•œ ë°°ì—´ì´ë‹¤. 
+	 int y_index; // y ìœ„ì¹˜ ë³€ìˆ˜. 
+	 int max_y_index; // ê°€ëŠ¥í•œ y ìœ„ì¹˜ ì´ ê°œìˆ˜
 } Node;
 
  typedef struct _Stack {
-	 Node *Top; // °¡Àå ³ªÁß¿¡ ¹èÄ¡µÈ Äı
-	 Node *First; // °¡Àå ¸ÕÀú ¹èÄ¡µÈ Äı
-	 ChessBoard *CurrentChessBoard; // ÄıÀÌ ¹èÄ¡µÉ¶§¸¶´Ù º¸µåÆÇ »õ·Î ±×¸²
-	 int AbleQueenCount; // ÄıÀÌ Á¦´ë·Î ÀüºÎ´Ù ¹èÄ¡µÉ¶§¸¶´Ù queencount++
-	 int QueenIndex; // ÄıÀÌ µé¾î¿Ã¶§¸¶´Ù +1¾¿ 
-	 int QueenAbleCoordinatesArray[LENGTH][2]; // Áö±İ±îÁö ¹èÄ¡µÈ ÄıÀÇ ÁÂÇ¥µéÀ» ÀúÀå. ³ªÁß¿¡ µé¾î¿Ã ÄıÀÇ ÁÂÇ¥¿¡ ¹üÀ§°¡ ´ê´ÂÁö ¾È´ê´ÂÁö °Ë»çÇÏ´Â ¿ëµµ 
+	 Node *Top; // ê°€ì¥ ë‚˜ì¤‘ì— ë°°ì¹˜ëœ í€¸
+	 Node *First; // ê°€ì¥ ë¨¼ì € ë°°ì¹˜ëœ í€¸
+	 ChessBoard *CurrentChessBoard; // í€¸ì´ ë°°ì¹˜ë ë•Œë§ˆë‹¤ ë³´ë“œíŒ ìƒˆë¡œ ê·¸ë¦¼
+	 int AbleQueenCount; // í€¸ì´ ì œëŒ€ë¡œ ì „ë¶€ë‹¤ ë°°ì¹˜ë ë•Œë§ˆë‹¤ queencount++
+	 int QueenIndex; // í€¸ì´ ë“¤ì–´ì˜¬ë•Œë§ˆë‹¤ +1ì”© 
+	 int QueenAbleCoordinatesArray[LENGTH][2]; // ì§€ê¸ˆê¹Œì§€ ë°°ì¹˜ëœ í€¸ì˜ ì¢Œí‘œë“¤ì„ ì €ì¥. ë‚˜ì¤‘ì— ë“¤ì–´ì˜¬ í€¸ì˜ ì¢Œí‘œì— ë²”ìœ„ê°€ ë‹¿ëŠ”ì§€ ì•ˆë‹¿ëŠ”ì§€ ê²€ì‚¬í•˜ëŠ” ìš©ë„ 
  } Stack;
 
- // º¸µå ÃÊ±âÈ­
+ // ë³´ë“œ ì´ˆê¸°í™”
 void BoardClear(Stack *stack, int NumberofQueen) {
 
 	 int i = 0;
@@ -66,7 +66,7 @@ void BoardClear(Stack *stack, int NumberofQueen) {
 	 }
  }
 
-// µğ¹ö±ë¿ë ÇÔ¼ö 
+// ë””ë²„ê¹…ìš© í•¨ìˆ˜ 
 void printBoard(Stack *stack, int NumberofQueen) {
 	for (int i = 0; i < NumberofQueen; i++) {
 		for (int j = 0; j < NumberofQueen; j++) {
@@ -76,7 +76,7 @@ void printBoard(Stack *stack, int NumberofQueen) {
 	}
 }
 
- // ½ºÅÃ ÃÊ±âÈ­ 
+ // ìŠ¤íƒ ì´ˆê¸°í™” 
  void stack_init(Stack *stack, int NumberofQueen) {
 	 stack->AbleQueenCount = 0;
 	 stack->Top = NULL;
@@ -86,7 +86,7 @@ void printBoard(Stack *stack, int NumberofQueen) {
 	BoardClear(stack, NumberofQueen);
  }
 
- // ½ºÅÃÀÌ ºñ¾ú´ÂÁö Á¶»ç 
+ // ìŠ¤íƒì´ ë¹„ì—ˆëŠ”ì§€ ì¡°ì‚¬ 
  int stack_is_empty(Stack *stack) {
 	 if (stack->Top == NULL) return YES;
 
@@ -95,33 +95,34 @@ void printBoard(Stack *stack, int NumberofQueen) {
 
 int DrawTopQueenRange(Stack *stack, int NumberofQueen) {
 
-	// ½ºÅÃÀÌ ºñ¾îÀÖÀ¸¸é topµµ ¾øÀ»Å×´Ï ¿À·ù¹ß»ı
+	// ìŠ¤íƒì´ ë¹„ì–´ìˆìœ¼ë©´ topë„ ì—†ì„í…Œë‹ˆ ì˜¤ë¥˜ë°œìƒ
 	 if (stack_is_empty(stack) == NO) {
 
 		 int length = stack->Top->Corrdinate->x;
 		 int width = stack->Top->Corrdinate->y;
 
-		 // °¡·Î 1·Î ¹Ù²Ù±â 
-		 // »ç½Ç ±»ÀÌ ÇÊ¿ä¾øÀ½. ¾îÂ÷ÇÇ x´Â 1¾¿ Áõ°¡½ÃÅ³°Å¶ó °ãÄ¥ÀÏÀÌ ¾øÁö¸¸ ±×·¡µµ ÇÏÀÚ 
+		 // ê°€ë¡œ 1ë¡œ ë°”ê¾¸ê¸° 
+		 // ì‚¬ì‹¤ êµ³ì´ í•„ìš”ì—†ìŒ. ì–´ì°¨í”¼ xëŠ” 1ì”© ì¦ê°€ì‹œí‚¬ê±°ë¼ ê²¹ì¹ ì¼ì´ ì—†ì§€ë§Œ ê·¸ë˜ë„ í•˜ì 
 		 for (int i = 0; i < NumberofQueen; i++) {
 			 stack->CurrentChessBoard->BoardState[length][i] = QUEENRANGE;
 		 }
 
-		 // ¼¼·Î 1·Î ¹Ù²Ù±â
+		 // ì„¸ë¡œ 1ë¡œ ë°”ê¾¸ê¸°
+		 // ì´ê±´ë˜ì™œ?
 		 for (int j = 0; j < NumberofQueen; j++) {
 			 stack->CurrentChessBoard->BoardState[j][width] = QUEENRANGE;
 		 }
 
-		 // ´ë°¢¼± ¿À¸¥ÂÊ ¾Æ·¡ ¹æÇâ
+		 // ëŒ€ê°ì„  ì˜¤ë¥¸ìª½ ì•„ë˜ ë°©í–¥
 		 while (length < NumberofQueen && width < NumberofQueen) {
 			 stack->CurrentChessBoard->BoardState[length++][width++] = QUEENRANGE;
 		 }
 
-		 // ´Ù½Ã ÃÊ±âÈ­ ÇØÁÖ°í 
+		 // ë‹¤ì‹œ ì´ˆê¸°í™” í•´ì£¼ê³  
 		 length = stack->Top->Corrdinate->x;
 		 width = stack->Top->Corrdinate->y;
 
-		 // ´ë°¢¼± ¿ŞÂÊ¾Æ·¡¹æÇâ 
+		 // ëŒ€ê°ì„  ì™¼ìª½ì•„ë˜ë°©í–¥ 
 		 while (length < NumberofQueen && width >= 0) {
 			 stack->CurrentChessBoard->BoardState[length++][width--] = QUEENRANGE;
 		 }
@@ -130,31 +131,31 @@ int DrawTopQueenRange(Stack *stack, int NumberofQueen) {
 	 return SUCCESS;
  }
 
- // Äı ÁÂÇ¥°ª ´ëÀÔ  
+ // í€¸ ì¢Œí‘œê°’ ëŒ€ì…  
 int setQueen(Stack *stack, int NumberofQueen) {
 
-	// Á¾·áÁ¶°ÇÀº Ã¹ ÄıÀÇ yÁÂÇ¥°¡ Ã¹ ÇàÀÇ Áß°£¿­ ÀÌ»ó¿¡ ³õ¿´À» ‹šÀÌ´Ù. 
-	// ¿Ö³Ä? ÀÔ·ÂµÈ Äı °³¼ö Àı¹İ±îÁö¸¸ ÇÏ°í µÎ¹èÇØÁÖ¸é µÇ´Ï±î.. ½Ã°£µÎ¹è·Î ÁÙÀÏ ¼ö ÀÖ´Ù. ¸¸¾à È¦¼ö°³ÀÌ¸é µÎ¹èÇÏ°í °¡¿îµ¥²¨ ÇÑ¹ø »©ÁÖ¸é µÈ´Ù.
+	// ì¢…ë£Œì¡°ê±´ì€ ì²« í€¸ì˜ yì¢Œí‘œê°€ ì²« í–‰ì˜ ì¤‘ê°„ì—´ ì´ìƒì— ë†“ì˜€ì„ ë–„ì´ë‹¤. 
+	// ì™œëƒ? ì…ë ¥ëœ í€¸ ê°œìˆ˜ ì ˆë°˜ê¹Œì§€ë§Œ í•˜ê³  ë‘ë°°í•´ì£¼ë©´ ë˜ë‹ˆê¹Œ.. ì‹œê°„ë‘ë°°ë¡œ ì¤„ì¼ ìˆ˜ ìˆë‹¤. ë§Œì•½ í™€ìˆ˜ê°œì´ë©´ ë‘ë°°í•˜ê³  ê°€ìš´ë°êº¼ í•œë²ˆ ë¹¼ì£¼ë©´ ëœë‹¤.
 
-	// ÇÏÁö¸¸ Áö±İÀº ±×³É ³¡±îÁö ½ÇÇà½ÃÄÑº¸ÀÚ°í~
+	// í•˜ì§€ë§Œ ì§€ê¸ˆì€ ê·¸ëƒ¥ ëê¹Œì§€ ì‹¤í–‰ì‹œì¼œë³´ìê³ ~
 	do {
 
-	// 1. ¸¸¾à Àü¿¡ ÄıÀÌ ³õÀº °÷ÀÌ ¾ø´Ù¸é, (Áï ¸Ç Ã³À½ ½ÇÇàÇÒ °æ¿ì) ÄıÀ» °¡´ÉÇÑ À§Ä¡ Áß¿¡ ¿­ÀÌ °¡Àå ÀÛÀº °÷¿¡ ¹èÄ¡ÇÑ´Ù. ¹°·Ğ, Ã¹ ÇàÀº 0ÀÌ´Ù. 
+	// 1. ë§Œì•½ ì „ì— í€¸ì´ ë†“ì€ ê³³ì´ ì—†ë‹¤ë©´, (ì¦‰ ë§¨ ì²˜ìŒ ì‹¤í–‰í•  ê²½ìš°) í€¸ì„ ê°€ëŠ¥í•œ ìœ„ì¹˜ ì¤‘ì— ì—´ì´ ê°€ì¥ ì‘ì€ ê³³ì— ë°°ì¹˜í•œë‹¤. ë¬¼ë¡ , ì²« í–‰ì€ 0ì´ë‹¤. 
 	if (stack_is_empty(stack) == YES) {
 
-		// ÀÏ´Ü ÄıÀ» ³õ±â À§ÇÑ ³ëµå»ı¼º 
+		// ì¼ë‹¨ í€¸ì„ ë†“ê¸° ìœ„í•œ ë…¸ë“œìƒì„± 
 		Node *NewQueen = (Node*)malloc(sizeof(Node));
 		memset(NewQueen, -1, sizeof(Node));
 
-		// ¹«Á¶°Ç ¸Ç Ã³À½ ÄıÀº 0,y¿¡¼­ ½ÃÀÛÇÒ °ÍÀÌ´Ù 
+		// ë¬´ì¡°ê±´ ë§¨ ì²˜ìŒ í€¸ì€ 0,yì—ì„œ ì‹œì‘í•  ê²ƒì´ë‹¤ 
 		NewQueen->Corrdinate = (Cor*)malloc(sizeof(Cor));
 		NewQueen->Corrdinate->x = 0;
-		// nullptrÂüÁ¶¿À·ù 
-		// ±×·³ ÀÌ°É ¹¹ ¾î¶»°Ôµç °ªÀ» ³Ö¾îÁà¾ßÇÑ´Ù´Â ¼Ò¸®ÀÎµ¥...?
-		// NewQueen->Corrdinate = (Cor*)malloc(sizeof(Cor)); ·Î ÇØ°á..?
+		// nullptrì°¸ì¡°ì˜¤ë¥˜ 
+		// ê·¸ëŸ¼ ì´ê±¸ ë­ ì–´ë–»ê²Œë“  ê°’ì„ ë„£ì–´ì¤˜ì•¼í•œë‹¤ëŠ” ì†Œë¦¬ì¸ë°...?
+		// NewQueen->Corrdinate = (Cor*)malloc(sizeof(Cor)); ë¡œ í•´ê²°..?
 
 
-		// ÀÏ´Ü 0ºÎÅÍ ÀÔ·ÂµÈ Äı ¼ö-1 ¸¸Å­ ¹è¿­¿¡ ³Ö´Â´Ù. ¾îÂ÷ÇÇ Ã¹ÁÙÀº ¸ğµç y°ªÀÌ °¡´ÉÇÏ´Ï±î, 0¹øÀº 0, 1¹øÀº 1... 
+		// ì¼ë‹¨ 0ë¶€í„° ì…ë ¥ëœ í€¸ ìˆ˜-1 ë§Œí¼ ë°°ì—´ì— ë„£ëŠ”ë‹¤. ì–´ì°¨í”¼ ì²«ì¤„ì€ ëª¨ë“  yê°’ì´ ê°€ëŠ¥í•˜ë‹ˆê¹Œ, 0ë²ˆì€ 0, 1ë²ˆì€ 1... 
 		int index = 0;
 
 		while (index < NumberofQueen) {
@@ -162,159 +163,172 @@ int setQueen(Stack *stack, int NumberofQueen) {
 			index++;
 		}
 
-		// ÄıÀÌ ÅÃÇÒ ¼ö ÀÖ´Â y ÀÎµ¦½ºÀÇ ÃÑ°³¼ö¸¦ ±¸ÇÑ´Ù.
+		// í€¸ì´ íƒí•  ìˆ˜ ìˆëŠ” y ì¸ë±ìŠ¤ì˜ ì´ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤.
 		NewQueen->max_y_index = index;
 
-		// ¸Ç Ã³À½ÀÌ´Ï±î y ÀÎµ¦½º À§Ä¡¸¦ 0À¸·Î Àâ´Â´Ù. 
+		// ë§¨ ì²˜ìŒì´ë‹ˆê¹Œ y ì¸ë±ìŠ¤ ìœ„ì¹˜ë¥¼ 0ìœ¼ë¡œ ì¡ëŠ”ë‹¤. 
 		NewQueen->y_index = 0;
 
-		// ±×¸®°í³ª¼­ arr¿¡¼­ °¡Àå ¾Õ¿¡ÀÖ´Â°ÅºÎÅÍ ¼±ÅÃ 
+		// ê·¸ë¦¬ê³ ë‚˜ì„œ arrì—ì„œ ê°€ì¥ ì•ì—ìˆëŠ”ê±°ë¶€í„° ì„ íƒ 
 		NewQueen->Corrdinate->y = NewQueen->AbleLocationArray_y[NewQueen->y_index];
 
-		// // ¸Ç Ã¹¹øÂ° Äı ÀÎµ¦½º´Â 0
+		// // ë§¨ ì²«ë²ˆì§¸ í€¸ ì¸ë±ìŠ¤ëŠ” 0
 		//NewQueen->QueenIndex = 0;
 
-		// ½ºÅÃÀÇ Äı ÁÂÇ¥ ÀúÀå¹è¿­¿¡ Ã¹¹ø¤Š ÁÂÇ¥°ªÀ» ³Ö´Â´Ù 
+		// ìŠ¤íƒì˜ í€¸ ì¢Œí‘œ ì €ì¥ë°°ì—´ì— ì²«ë²ˆì¨° ì¢Œí‘œê°’ì„ ë„£ëŠ”ë‹¤ 
 		stack->QueenAbleCoordinatesArray[NewQueen->Corrdinate->x][X] = NewQueen->Corrdinate->x;
 		stack->QueenAbleCoordinatesArray[NewQueen->Corrdinate->x][Y] = NewQueen->Corrdinate->y;
 
-		// ¸Ç Ã³À½¿¡ ÇÑÇØ¼­, ¿ÏÀü ÃÊ±â»óÅÂ, ¹éÁö»óÅÂ º¸µå¸¦ ÀúÀåÇÏ±âÀ§ÇÑ ³ëµå¸¦ µû·Î ¸¸µç´Ù. 
+		// ë§¨ ì²˜ìŒì— í•œí•´ì„œ, ì™„ì „ ì´ˆê¸°ìƒíƒœ, ë°±ì§€ìƒíƒœ ë³´ë“œë¥¼ ì €ì¥í•˜ê¸°ìœ„í•œ ë…¸ë“œë¥¼ ë”°ë¡œ ë§Œë“ ë‹¤. 
 		Node *SaveNullBoard = (Node*)malloc(sizeof(Node));
-		memset(SaveNullBoard, 0, sizeof(Node));
+		memset(SaveNullBoard, -1, sizeof(Node));
 
 		SaveNullBoard->NodeChessBoard = stack->CurrentChessBoard;
 
-		// ¸Ç Ã³À½ ÄıÀº Æ¯º°È÷ ¹éÁö»óÅÂ º¸µå¸¦ °¡¸®Å²´Ù. ³ªÁß¿¡ ¼öÁ¤¿¡ ¿ëÀÌÇÏµµ·Ï 
+		// ë§¨ ì²˜ìŒ í€¸ì€ íŠ¹ë³„íˆ ë°±ì§€ìƒíƒœ ë³´ë“œë¥¼ ê°€ë¦¬í‚¨ë‹¤. ë‚˜ì¤‘ì— ìˆ˜ì •ì— ìš©ì´í•˜ë„ë¡ 
 		NewQueen->BeforeThisQueen = SaveNullBoard;
 
-		//// Äı ¹øÈ£¸¦ ºÎ¿©ÇØÁØ´Ù.  // ÀÌ°Å ÇÊ¿äÇÏ³Ä?
+		//// í€¸ ë²ˆí˜¸ë¥¼ ë¶€ì—¬í•´ì¤€ë‹¤.  // ì´ê±° í•„ìš”í•˜ëƒ?
 		//NewQueen->QueenIndex = NewQueen->Corrdinate->x;
 
-		// µåµğ¾î »õ ÄıÀ» ½ºÅÃ¿¡ ¸Â¾ÆµéÀÏ ÁØºñ°¡ µÇ¾ú´Ù
+		// ë“œë””ì–´ ìƒˆ í€¸ì„ ìŠ¤íƒì— ë§ì•„ë“¤ì¼ ì¤€ë¹„ê°€ ë˜ì—ˆë‹¤
 		stack->Top = NewQueen;
 
-		// ÀÌ ½ºÅÃÀÇ First´Â º¯ÇÏÁö ¾ÊÀ»°ÍÀÌ´Ù. 
+		// ì´ ìŠ¤íƒì˜ FirstëŠ” ë³€í•˜ì§€ ì•Šì„ê²ƒì´ë‹¤. 
 		stack->First = NewQueen;
 
-		// Äı ÁÂÇ¥°ª¿¡ µû¶ó º¸µå¿¡ ¹üÀ§Ç¥½ÃÇØÁØ´Ù.
+		// í€¸ ì¢Œí‘œê°’ì— ë”°ë¼ ë³´ë“œì— ë²”ìœ„í‘œì‹œí•´ì¤€ë‹¤.
 		DrawTopQueenRange(stack, NumberofQueen);
 
-		// ±× ¹üÀ§°¡ ±×·ÁÁø Ã¼½ºº¸µå¸¦ Ã¹¹ø¤Š ³ëµå¿¡ ´ã¾ÆÁÖÀÚ 
+		// ê·¸ ë²”ìœ„ê°€ ê·¸ë ¤ì§„ ì²´ìŠ¤ë³´ë“œë¥¼ ì²«ë²ˆì¨° ë…¸ë“œì— ë‹´ì•„ì£¼ì 
 		NewQueen->NodeChessBoard = stack->CurrentChessBoard;
 
 		stack->QueenIndex++;
 
 	}
-	else {  // ¸¸¾à ÄıÀÌ Ã¹¹ø¤Š·Î ³õ¾ÆÁø°Ô ¾Æ´Ï¶ó¸é..
+	else {  // ë§Œì•½ í€¸ì´ ì²«ë²ˆì¨°ë¡œ ë†“ì•„ì§„ê²Œ ì•„ë‹ˆë¼ë©´..
 
-		// 2. Àü¿¡ ³õ¿©Áø Äı ¹üÀ§¿¡ ¸ğµÎ ´êÁö ¾Ê´Â y_index°ªÀ» Ã£¾Æº¸ÀÚ.  ¹°·Ğ ÀÌ¶§ ´ÙÀ½ ³ëµåÀÇ ÇàÀº Àü ³ëµå ÇàÀÇ x°ª+1À¸·Î ¸¸µé¾îÁØ´Ù. 
+		// 2. ì „ì— ë†“ì—¬ì§„ í€¸ ë²”ìœ„ì— ëª¨ë‘ ë‹¿ì§€ ì•ŠëŠ” y_indexê°’ì„ ì°¾ì•„ë³´ì.  ë¬¼ë¡  ì´ë•Œ ë‹¤ìŒ ë…¸ë“œì˜ í–‰ì€ ì „ ë…¸ë“œ í–‰ì˜ xê°’+1ìœ¼ë¡œ ë§Œë“¤ì–´ì¤€ë‹¤. 
 
-		// Äı ³ëµå»ı¼º 
+		// í€¸ ë…¸ë“œìƒì„± 
 		Node *NewQueen = (Node*)malloc(sizeof(Node));
 		memset(NewQueen, -1, sizeof(Node));
+		NewQueen->BeforeThisQueen = stack->Top;
+		stack->Top = NewQueen;
 
-		// 3. ¸¸¾à ÀÌ¹ø xÇàÀ» Ã³À½À¸·Î Á¶»çÇÏ¸é, ÇöÀç º¸µåÆÇÀ» °¡Á®¿À°í, ÀÌ¹ø x¹øÂ° Çà¿¡¼­ 0ÀÎÁöÁ¡À» ¸ğµÎ Â÷·Ê´ë·Î ÀúÀåÇÑ´Ù. ÀÌ µ¿ÀÛÀº ±× ÇàÀÇ ³ëµå°¡ »èÁ¦µÇ±â Àü±îÁö´Â ÇÑ¹ø¸¸ ½ÇÇàµÈ´Ù. 
-		// Áï ÀÌ°Ô ¹º¸»ÀÌ³Ä ÇÏ¸é ÄıÀÌ ÇöÀç ÀÌ Çà¿¡ ³õ¿©ÀÖÁö ¾Ê´Ù´Â ¶æ
-		if (stack->Top->Corrdinate->x == stack->QueenIndex - 1) {
+		// Problem 
+		// 3. ë§Œì•½ ì´ë²ˆ xí–‰ì„ ì²˜ìŒìœ¼ë¡œ ì¡°ì‚¬í•˜ë©´, í˜„ì¬ ë³´ë“œíŒì„ ê°€ì ¸ì˜¤ê³ , ì´ë²ˆ xë²ˆì§¸ í–‰ì—ì„œ 0ì¸ì§€ì ì„ ëª¨ë‘ ì°¨ë¡€ëŒ€ë¡œ ì €ì¥í•œë‹¤. ì´ ë™ì‘ì€ ê·¸ í–‰ì˜ ë…¸ë“œê°€ ì‚­ì œë˜ê¸° ì „ê¹Œì§€ëŠ” í•œë²ˆë§Œ ì‹¤í–‰ëœë‹¤. 
+		// ì¦‰ ì´ê²Œ ë­”ë§ì´ëƒ í•˜ë©´ í€¸ì´ í˜„ì¬ ì´ í–‰ì— ë†“ì—¬ìˆì§€ ì•Šë‹¤ëŠ” ëœ»
+		// ì´ê±¸ ë„ë°ì²´ ë¬´ìŠ¨ ì¡°ê±´ë¬¸ì„ ì¨ì•¼ í• ê¹Œ? 
+		// ì´ê²Œ ìê¾¸ ëŒì•„ê°€ì„œ ì˜¤ë¥˜ë‚¨ 
+		//stack->Top->BeforeThisQueen->Corrdinate->x == stack->QueenIndex - 1 && stack->Top->BeforeThisQueen->y_index == -1
+		if (				//??			) {
 			int index = 0;
-			// w
 
 			for (int width = 0; width < NumberofQueen; width++) {
-				if (stack->CurrentChessBoard->BoardState[stack->Top->Corrdinate->x + 1][width] != 1) {
+				if (stack->CurrentChessBoard->BoardState[stack->Top->BeforeThisQueen->Corrdinate->x + 1][width] != 1) {
 					NewQueen->AbleLocationArray_y[index++] = width;
 				}
 			}
 
-			// ¾ğÁ¦³ª Çà¸¶´Ù yÀÎµ¦½º ½ÃÀÛÁ¡Àº 0ÀÌ´Ù. // y¿­ °ªÀÌ Á¤ÇØÁø ÀÌ»ó º¯ÇÏÁö ¾Ê´Â´Ù. 
+			// ì–¸ì œë‚˜ í–‰ë§ˆë‹¤ yì¸ë±ìŠ¤ ì‹œì‘ì ì€ 0ì´ë‹¤. // yì—´ ê°’ì´ ì •í•´ì§„ ì´ìƒ ë³€í•˜ì§€ ì•ŠëŠ”ë‹¤. 
 			NewQueen->y_index = 0;
 
-			// »õ ÄıÀÌ ÅÃÇÒ ¼ö ÀÖ´Â y ÀÎµ¦½º ÃÑ°³¼ö¸¦ ±¸ÇÑ´Ù. // y¿­ °ªÀÌ Á¤ÇØÁø ÀÌ»ó º¯ÇÏÁö ¾Ê´Â´Ù. 
+			// ìƒˆ í€¸ì´ íƒí•  ìˆ˜ ìˆëŠ” y ì¸ë±ìŠ¤ ì´ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤. // yì—´ ê°’ì´ ì •í•´ì§„ ì´ìƒ ë³€í•˜ì§€ ì•ŠëŠ”ë‹¤. 
 			NewQueen->max_y_index = index;
 		}
 
-		// 4. ¸¸¾à ¼±ÅÃÇÒ 0ÀÌ ¾øÀ» °æ¿ì, Àü ³ëµå·Î µ¹¾Æ°£´Ù. **************¿©±â ¼öÁ¤¸¸ ÇÏ¸é µÉµí 
-		if (NewQueen->AbleLocationArray_y[NewQueen->y_index] == NULL) {
+Recursive:
+		// 4. ë§Œì•½ ì„ íƒí•  0ì´ ì—†ì„ ê²½ìš°, ì „ ë…¸ë“œë¡œ ëŒì•„ê°„ë‹¤. **************ì—¬ê¸° ìˆ˜ì •ë§Œ í•˜ë©´ ë ë“¯ 
+		if (stack->Top->BeforeThisQueen->AbleLocationArray_y[stack->Top->BeforeThisQueen->y_index] == -1) {
 
-			// ÄıÀ» ³õÀ» ¼ö ¾øÀ¸¹Ç·Î freeÇØÁØ´Ù. 
+			// ìŠ¤íƒ íƒ‘ ìœ„ì¹˜ë¥¼ ë‹¤ì‹œ ëŒë ¤ì¤€ë‹¤. 
+			stack->Top = stack->Top->BeforeThisQueen;
+
+			// í€¸ì„ ë†“ì„ ìˆ˜ ì—†ìœ¼ë¯€ë¡œ freeí•´ì¤€ë‹¤. 
 			free(NewQueen);
 
-			// ¹Ù·Î Àü¿¡ ³õÀÎ ÄıÀÇ yÀÎµ¦½º À§Ä¡¸¦ +1ÇØÁØ´Ù 
+			// ë°”ë¡œ ì „ì— ë†“ì¸ í€¸ì˜ yì¸ë±ìŠ¤ ìœ„ì¹˜ë¥¼ +1í•´ì¤€ë‹¤ 
 			stack->Top->y_index++;
 
-			// 5. Àü ³ëµå·Î µ¹¾Æ°¬´Âµ¥, ÇÏÇÊ yÀÎµ¦½º°ªÀÌ ¸¶Áö¸·ÀÌ¾ú´Ù¸é? ´Ù½Ã À§·Î ¿Ã·ÁÁà¾ßÇÔ
-			if (stack->Top->AbleLocationArray_y[stack->Top->y_index] == NULL) {
+			// 5. ì „ ë…¸ë“œë¡œ ëŒì•„ê°”ëŠ”ë°, í•˜í•„ yì¸ë±ìŠ¤ê°’ì´ ë§ˆì§€ë§‰ì´ì—ˆë‹¤ë©´? ë‹¤ì‹œ ìœ„ë¡œ ì˜¬ë ¤ì¤˜ì•¼í•¨
+			if (stack->Top->AbleLocationArray_y[stack->Top->y_index] == -1) {
 
-				// ±× Àü¿¡ÀÖ´ø Äı ³ëµå¸¦ ¾ø¾Ö°í ¶Ç´Ù½Ã ±× ÀüÀ¸·Î µ¹¾Æ°¡¾ßÇÔ. 
+				// ê·¸ ì „ì—ìˆë˜ í€¸ ë…¸ë“œë¥¼ ì—†ì• ê³  ë˜ë‹¤ì‹œ ê·¸ ì „ìœ¼ë¡œ ëŒì•„ê°€ì•¼í•¨. 
 
-				// ¸ÕÀú ±× ³ëµå¸¦ ¾ø¾Ö¾ß ÇÏ´Ï±î »èÁ¦ÇÒ ³ëµå¸¦ ¸¸µé¾îÁÖ°í, ÀÌ¸¦ ½ºÅÃ top À¸·Î ÁöÁ¤. 
+				// ë¨¼ì € ê·¸ ë…¸ë“œë¥¼ ì—†ì• ì•¼ í•˜ë‹ˆê¹Œ ì‚­ì œí•  ë…¸ë“œë¥¼ ë§Œë“¤ì–´ì£¼ê³ , ì´ë¥¼ ìŠ¤íƒ top ìœ¼ë¡œ ì§€ì •. 
 				Node *DeleteQueen = stack->Top;
 
-				// ±× Äı ³ëµå°¡ °®°íÀÖ´ø µ¥ÀÌÅÍµéÀÌ ½ºÅÃ¿¡ µé¾î°£°É ÃÊ±âÈ­ ½ÃÄÑÁà¾ßÇÔ
+				// ê·¸ í€¸ ë…¸ë“œê°€ ê°–ê³ ìˆë˜ ë°ì´í„°ë“¤ì´ ìŠ¤íƒì— ë“¤ì–´ê°„ê±¸ ì´ˆê¸°í™” ì‹œì¼œì¤˜ì•¼í•¨
 
-
-
-				stack->QueenAbleCoordinatesArray[stack->Top->Corrdinate->x][X] = NULL;
-				stack->QueenAbleCoordinatesArray[stack->Top->Corrdinate->x][Y] = NULL;
+				stack->QueenAbleCoordinatesArray[stack->Top->Corrdinate->x][X] = -1;
+				stack->QueenAbleCoordinatesArray[stack->Top->Corrdinate->x][Y] = -1;
 
 				//(*stack->QueenAbleCoordinatesArray[stack->Top->Corrdinate->x]) = NULL;
 
-
-
-				// ½ºÅÃ topÀÇ À§Ä¡¸¦ º¯°æÇØÁØ´Ù. 
+				// ìŠ¤íƒ topì˜ ìœ„ì¹˜ë¥¼ ë³€ê²½í•´ì¤€ë‹¤. 
 				stack->Top = stack->Top->BeforeThisQueen;
 
-				// º¯°æÇÑ ½ºÅÃ TOPÀÇ YÀÎµ¦½º¸¦ 1 ¿Ã·ÁÁØ´Ù. 
+				// ë³€ê²½í•œ ìŠ¤íƒ TOPì˜ Yì¸ë±ìŠ¤ë¥¼ 1 ì˜¬ë ¤ì¤€ë‹¤. 
 				stack->Top->y_index++;
+				
+				// ì²´ìŠ¤íŒ ì—­ì‹œ ë°”ê¿”ì¤˜ì•¼í•¨. 
+				// ìœ„ì—ì„œ 0ë²ˆì§¸ í–‰ ì „ì—ë„ ë…¸ë“œë¥¼ í•˜ë‚˜ ë§Œë“¦ìœ¼ë¡œì¨ ë§Œì•½ 0ë²ˆì¨° í–‰ì˜ Yìœ„ì¹˜ê°€ ë°”ë€”ë•Œë„ ë§ˆì°¬ê°€ì§€ë¡œ ì˜¤ë¥˜ì—†ì´ ì‘ë™ë˜ë„ë¡ í–ˆë‹¤. 
 
-				// Ã¼½ºÆÇ ¿ª½Ã ¹Ù²ãÁà¾ßÇÔ. 
-				// À§¿¡¼­ 0¹øÂ° Çà Àü¿¡µµ ³ëµå¸¦ ÇÏ³ª ¸¸µêÀ¸·Î½á ¸¸¾à 0¹ø¤Š ÇàÀÇ YÀ§Ä¡°¡ ¹Ù²ğ¶§µµ ¸¶Âù°¡Áö·Î ¿À·ù¾øÀÌ ÀÛµ¿µÇµµ·Ï Çß´Ù. 
-				stack->CurrentChessBoard = stack->Top->BeforeThisQueen->NodeChessBoard;
+				// ì˜¤ë¥˜ nullptrì°¸ì¡° .. ì™œ? 
+				if (stack->Top->BeforeThisQueen != NULL) {
+					stack->CurrentChessBoard = stack->Top->BeforeThisQueen->NodeChessBoard;
+				}
 
 				stack->QueenIndex--;
 
-				// ÀÌÁ¦ º¸³»ÁÖÀÚ..
+				// ì´ì œ ë³´ë‚´ì£¼ì..
 				free(DeleteQueen);
 			}
+
+			goto Recursive;
+
 		}
-		else {  // 6. ÄıµéÀÇ ¹üÀ§¿¡¼­ ¹ş¾î³­ °ø°£, Áï 0ÀÌ ÀÖÀ» °æ¿ì 
+
+		else {  // 6. í€¸ë“¤ì˜ ë²”ìœ„ì—ì„œ ë²—ì–´ë‚œ ê³µê°„, ì¦‰ 0ì´ ìˆì„ ê²½ìš° 
 
 			// NewQueen->QueenIndex = ?
-			// ÀÌ°Å ¾²±ä ÇÏ³Ä>?? 
+			// ì´ê±° ì“°ê¸´ í•˜ëƒ>?? 
 
-			// »õ ÄıÀÇ x°ªÀº ±× Àü ÄıÀÇ x°ª+1ÀÌ´Ù. 		
+			// ìƒˆ í€¸ì˜ xê°’ì€ ê·¸ ì „ í€¸ì˜ xê°’+1ì´ë‹¤. 		
 			NewQueen->Corrdinate = (Cor*)malloc(sizeof(Cor));
 
-			NewQueen->Corrdinate->x = stack->Top->Corrdinate->x + 1;
+			NewQueen->Corrdinate->x = stack->Top->BeforeThisQueen->Corrdinate->x + 1;
 
-			// »õ Äı ³ëµå¸¦ ±×Àü¿¡ ³õ¾ÆÁø Äı ³ëµå¿Í ¿¬°áÇØÁØ´Ù. 
-			NewQueen->BeforeThisQueen = stack->Top;
+			// ìƒˆ í€¸ ë…¸ë“œë¥¼ ê·¸ì „ì— ë†“ì•„ì§„ í€¸ ë…¸ë“œì™€ ì—°ê²°í•´ì¤€ë‹¤. 
+			//NewQueen->BeforeThisQueen = stack->Top;
 
-			// ±Ùµ¥ ¸¸¾à ¸Ç ¸¶Áö¸· ÄıÀÌ¸é ¿©±â¼­ Ä«¿îÆ® ¿Ã·ÁÁà¾ßÇÑ´Ù. 
+			// ê·¼ë° ë§Œì•½ ë§¨ ë§ˆì§€ë§‰ í€¸ì´ë©´ ì—¬ê¸°ì„œ ì¹´ìš´íŠ¸ ì˜¬ë ¤ì¤˜ì•¼í•œë‹¤. 
 			if (NewQueen->Corrdinate->x == NumberofQueen - 1) {
 				stack->AbleQueenCount++;
 			}
-			//TODO ÀÌ°Å ¸Ç Ã³À½ °æ¿ì¿¡ Ãß°¡ÇÒ°Í ÄıÀÌ ÇÑ°³ÀÏ¼öµµ ÀÖÀ½ 
+			//TODO ì´ê±° ë§¨ ì²˜ìŒ ê²½ìš°ì— ì¶”ê°€í• ê²ƒ í€¸ì´ í•œê°œì¼ìˆ˜ë„ ìˆìŒ 
 
-			// ÀÌÁ¦ ÁÂÇ¥ µî·ÏÇÏ°í 
+			// ì´ì œ ì¢Œí‘œ ë“±ë¡í•˜ê³  
 			NewQueen->Corrdinate->y = NewQueen->AbleLocationArray_y[NewQueen->y_index];
 
 			stack->QueenAbleCoordinatesArray[NewQueen->Corrdinate->x][X] = NewQueen->Corrdinate->x;
 			stack->QueenAbleCoordinatesArray[NewQueen->Corrdinate->x][Y] = NewQueen->Corrdinate->y;
 
-			// topÀ» newqueenÀ¸·Î ÁöÁ¤ÇØÁÖ°í 
-			stack->Top = NewQueen;
+			// topì„ newqueenìœ¼ë¡œ ì§€ì •í•´ì£¼ê³  
+			//stack->Top = NewQueen;
 
-			// º¸µå ±×¸®°í
+			// ë³´ë“œ ê·¸ë¦¬ê³ 
 			DrawTopQueenRange(stack, NumberofQueen);
 
-			// º¸µå µî·ÏÇÏ°í 
+			// ë³´ë“œ ë“±ë¡í•˜ê³  
 			NewQueen->NodeChessBoard = stack->CurrentChessBoard;
 
 			stack->QueenIndex++;
 
 		}
 	}
-} while (stack->First->Corrdinate->y < NumberofQueen);
+} while (stack->First->y_index < NumberofQueen);
 
 		 return stack->AbleQueenCount; 
  }
@@ -336,4 +350,5 @@ int setQueen(Stack *stack, int NumberofQueen) {
 
 	return 0;
 }
- // »ì·ÁÁà 
+
+ // ì‚´ë ¤ì¤˜ 
