@@ -1,3 +1,5 @@
-# Somebody help....T.T
+# Somebody help.... T.T
 
-I think I solved it too hard...... is gold still far away?
+It seems too early to solve these problems with my skills.
+
++ 21.09.11 / baek_9663 N_Queen
