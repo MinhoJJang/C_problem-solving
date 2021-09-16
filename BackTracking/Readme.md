@@ -1,6 +1,6 @@
 # BackTracking Algorithm 
 
-[Baek_BackTracking_question](https://www.acmicpc.net/step/34)
+[Baek_BackTracking_questions](https://www.acmicpc.net/step/34)
 
  Backtracking is an algorithm that inspects the number of all combinations, but only when they meet the conditions. It is usually used to solve the condition satisfaction problem. (Called CSP)
  
