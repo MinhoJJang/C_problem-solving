@@ -7,4 +7,5 @@ Study algorithms and solve problems with C
 [solved.ac.tier](https://solved.ac/profile/ahchjang)
 
 **0910 achieve S4**
+**0920 achieve S3**
 -- Towards Gold!
