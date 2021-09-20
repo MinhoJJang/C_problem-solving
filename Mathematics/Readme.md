@@ -1,5 +1,5 @@
 # Math
 
-[Baek_Mathematics01_questions](https://www.acmicpc.net/step/8)
+[BOJ_Mathematics01](https://www.acmicpc.net/step/8)
 
 Just basic math problems
