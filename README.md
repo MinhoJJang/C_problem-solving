@@ -1,4 +1,4 @@
-# C_ProblemSolving
+## C_ProblemSolving
 
 Study algorithms and solve problems with C
 
