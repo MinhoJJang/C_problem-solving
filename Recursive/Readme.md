@@ -2,9 +2,9 @@
 
 Recursive call refers to referring to oneself when defining something.
 
-[Baek_Recursive_question](https://www.acmicpc.net/step/19)
+[BOJ_Recursive](https://www.acmicpc.net/step/19)
 
-+ Example that uses recursive calls.
++ Representative example that uses recursive calls.
 
 ```c
 unsigned int factorial(unsigned int n)
