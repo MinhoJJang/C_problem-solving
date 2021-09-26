@@ -7,6 +7,7 @@ Study algorithms and solve problems with C
 
 **S4 - 0910**   
 **S3 - 0920**   
+**S2 - 0927**
 
 
       
