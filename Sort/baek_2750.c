@@ -6,85 +6,84 @@
 
 /*
 https://www.acmicpc.net/problem/2750
-
-N°³ÀÇ ¼ö°¡ ÁÖ¾îÁ³À» ¶§, ÀÌ¸¦ ¿À¸§Â÷¼øÀ¸·Î Á¤·ÄÇÏ´Â ÇÁ·Î±×·¥À» ÀÛ¼ºÇÏ½Ã¿À.
+Nê°œì˜ ìˆ˜ê°€ ì£¼ì–´ì¡Œì„ ë•Œ, ì´ë¥¼ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•˜ëŠ” í”„ë¡œê·¸ëž¨ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 */
 
 
-// ´Ü¼øÇÏ°Ô 1¹ø2¹ø, 2¹ø3¹ø, 3¹ø4¹ø ÀÌ·¸°Ô ºñ±³ÇÏ¿© n-1¹øn¹ø ±îÁö Á¤·ÄÇÏ´Â°Ô 1»çÀÌÅ¬. ±×·¸°Ô »çÀÌÅ¬À» ¹Ýº¹ÇÑ´Ù. 
-void BubbleSort(int arr[], int n) // ¹öºí Á¤·Ä
+// ë‹¨ìˆœí•˜ê²Œ 1ë²ˆ2ë²ˆ, 2ë²ˆ3ë²ˆ, 3ë²ˆ4ë²ˆ ì´ë ‡ê²Œ ë¹„êµí•˜ì—¬ n-1ë²ˆnë²ˆ ê¹Œì§€ ì •ë ¬í•˜ëŠ”ê²Œ 1ì‚¬ì´í´. ê·¸ë ‡ê²Œ ì‚¬ì´í´ì„ ë°˜ë³µí•œë‹¤. 
+void BubbleSort(int arr[], int n) // ë²„ë¸” ì •ë ¬
 {
 	int i, j;
 	int temp;
 
-	// cycle È¸Àü È½¼ö
+	// cycle íšŒì „ íšŸìˆ˜
 	for (i = 0; i < n - 1; i++) {
 
-		// ºñ±³È½¼ö
+		// ë¹„êµíšŸìˆ˜
 		for (j = 0; j < (n - i) - 1; j++) {
 
-			// 1. ÀÎÁ¢ÇÑ µÎ°³ ºñ±³ 
-			if (arr[j] > arr[j + 1]) // 2. Å©±â°¡ ¹Ý´ë¶ó¸é.. <<ºñ±³>>
+			// 1. ì¸ì ‘í•œ ë‘ê°œ ë¹„êµ 
+			if (arr[j] > arr[j + 1]) // 2. í¬ê¸°ê°€ ë°˜ëŒ€ë¼ë©´.. <<ë¹„êµ>>
 			{
-				temp = arr[j];		 // <<ÀÌµ¿>> ÇÑ »çÀÌÅ¬´ç ÃÖ´ë (n-i)-1¹ø ¹ß»ý (±×³É À§ for¹®ÀÇ jÃÖ´ëÄ¡¸¸Å­ ¹ß»ýÇÑ´Ù´Â ¼Ò¸®ÀÓ)
-				arr[j] = arr[j + 1]; // <<ÀÌµ¿>>
-				arr[j + 1] = temp;  // <<ÀÌµ¿>>
+				temp = arr[j];		 // <<ì´ë™>> í•œ ì‚¬ì´í´ë‹¹ ìµœëŒ€ (n-i)-1ë²ˆ ë°œìƒ (ê·¸ëƒ¥ ìœ„ forë¬¸ì˜ jìµœëŒ€ì¹˜ë§Œí¼ ë°œìƒí•œë‹¤ëŠ” ì†Œë¦¬ìž„)
+				arr[j] = arr[j + 1]; // <<ì´ë™>>
+				arr[j + 1] = temp;  // <<ì´ë™>>
 			}
 		}
 	}
 }
 
-// 1¹øÀ» 2¹ø~n¹ø±îÁö ÈÈÀ¸¸é¼­ Á¦ÀÏ ÀÛÀº ¼ö¿Í À§Ä¡¸¦ ¹Ù²Þ. ±×·¡¼­ '¼±ÅÃ'Á¤·ÄÀÓ. Á¦ÀÏ ÀÛÀº ¼ö¸¦ '¼±ÅÃ'ÇÏ´Ï±î
+// 1ë²ˆì„ 2ë²ˆ~në²ˆê¹Œì§€ í›‘ìœ¼ë©´ì„œ ì œì¼ ìž‘ì€ ìˆ˜ì™€ ìœ„ì¹˜ë¥¼ ë°”ê¿ˆ. ê·¸ëž˜ì„œ 'ì„ íƒ'ì •ë ¬ìž„. ì œì¼ ìž‘ì€ ìˆ˜ë¥¼ 'ì„ íƒ'í•˜ë‹ˆê¹Œ
 void SelectionSort(int arr[], int n) {
 
 	int i, j;
 	int temp;
 
-	for (i = 0; i < n - 1; i++) // ºñ±³ »çÀÌÅ¬ È½¼ö = n- 1¹ø
+	for (i = 0; i < n - 1; i++) // ë¹„êµ ì‚¬ì´í´ íšŸìˆ˜ = n- 1ë²ˆ
 	{
 		int index = i;
 
 		for (j = i + 1; j < n; j++)
-			// ºñ±³ arr[i] ¿Í arr[i+1]~arr[n-1]±îÁö
+			// ë¹„êµ arr[i] ì™€ arr[i+1]~arr[n-1]ê¹Œì§€
 		{
 			if (arr[index] > arr[j]) {
-				// arr[index]°ªº¸´Ù '´õ' ÀÛÀº°ªÀ» Ã£¾Æ¾ßÇÏ´Ï±î if Á¶°Ç½ÄÀ» Àú·¸°Ô ¾²´Â °Ô ¸Â´Ù. ³ª´Â Ã³À½¿¡ arr[i] > arr[j] ¶ó°í ½á¼­ ¿À·ù°¡ »ý°å´Ù. 
-				//<<ºñ±³>>
+				// arr[index]ê°’ë³´ë‹¤ 'ë”' ìž‘ì€ê°’ì„ ì°¾ì•„ì•¼í•˜ë‹ˆê¹Œ if ì¡°ê±´ì‹ì„ ì €ë ‡ê²Œ ì“°ëŠ” ê²Œ ë§žë‹¤. ë‚˜ëŠ” ì²˜ìŒì— arr[i] > arr[j] ë¼ê³  ì¨ì„œ ì˜¤ë¥˜ê°€ ìƒê²¼ë‹¤. 
+				//<<ë¹„êµ>>
 				index = j;
 			}
 		}
 
 		if (index != i)
 		{
-			temp = arr[i];			 // <<ÀÌµ¿>> 1»çÀÌÅ¬´ç ¸¹¾Æ¾ß 1¹ø. 
-			arr[i] = arr[index];	 // <<ÀÌµ¿>>
-			arr[index] = temp;		 // <<ÀÌµ¿>>
+			temp = arr[i];			 // <<ì´ë™>> 1ì‚¬ì´í´ë‹¹ ë§Žì•„ì•¼ 1ë²ˆ. 
+			arr[i] = arr[index];	 // <<ì´ë™>>
+			arr[index] = temp;		 // <<ì´ë™>>
 		}
 	}
 }
 
-// n°³ÀÇ µ¥ÀÌÅÍ Áß¿¡¼­ ¾Õ¿¡¼­ºÎÅÍ i°³ ¸¸Å­À» Á¤·ÄÇÑ´Ù. Á¤·Ä ¹æ½ÄÀº ¹öºíÁ¤·Ä°ú ºñ½ÁÇÏ³ª µÚ¿¡¼­ºÎÅÍ Á¤·Ä½ÃÀÛÇÑ´Ù´Â Á¡, Á¤·ÄµÈ ¼ø°£ºÎÅÍ breakµÈ´Ù´Â Á¡¿¡¼­ Â÷ÀÌ°¡ ÀÖÀ½. 
+// nê°œì˜ ë°ì´í„° ì¤‘ì—ì„œ ì•žì—ì„œë¶€í„° iê°œ ë§Œí¼ì„ ì •ë ¬í•œë‹¤. ì •ë ¬ ë°©ì‹ì€ ë²„ë¸”ì •ë ¬ê³¼ ë¹„ìŠ·í•˜ë‚˜ ë’¤ì—ì„œë¶€í„° ì •ë ¬ì‹œìž‘í•œë‹¤ëŠ” ì , ì •ë ¬ëœ ìˆœê°„ë¶€í„° breakëœë‹¤ëŠ” ì ì—ì„œ ì°¨ì´ê°€ ìžˆìŒ. 
 void InsertionSort(int arr[], int n)
 {
 	int i, j;
-	int insData; // µ¥ÀÌÅÍ ÀÓ½Ã º¸°ü¼Ò
+	int insData; // ë°ì´í„° ìž„ì‹œ ë³´ê´€ì†Œ
 
 	for (i = 1; i < n; i++) {
 
 		insData = arr[i];
 
 		for (j = i - 1; j >= 0; j--) {
-			if (insData < arr[j]) { // ºñ±³
-				arr[j + 1] = arr[j];	  // <<ÀÌµ¿>>
-				// ¹Ù·Î ¹Ù·Î °ª ¹Ù²ãÁÖ¾î¾ßÇÔ
-				// P.S. ±×³É À§Ä¡¸¦ Ã£´Â°Ô ´õ ºü¸£Áö ¾ÊÀ»±î? °ªÀ» ¹Ù²Ù´Â°Íº¸´Ù..? 
-				// ¾îÂ÷ÇÇ À§Ä¡¸¦ Ã£¾Æµµ ÀÚ¸®ÀÌµ¿ÇØ¾ßÇÏ³×..
+			if (insData < arr[j]) { // ë¹„êµ
+				arr[j + 1] = arr[j];	  // <<ì´ë™>>
+				// ë°”ë¡œ ë°”ë¡œ ê°’ ë°”ê¿”ì£¼ì–´ì•¼í•¨
+				// P.S. ê·¸ëƒ¥ ìœ„ì¹˜ë¥¼ ì°¾ëŠ”ê²Œ ë” ë¹ ë¥´ì§€ ì•Šì„ê¹Œ? ê°’ì„ ë°”ê¾¸ëŠ”ê²ƒë³´ë‹¤..? 
+				// ì–´ì°¨í”¼ ìœ„ì¹˜ë¥¼ ì°¾ì•„ë„ ìžë¦¬ì´ë™í•´ì•¼í•˜ë„¤..
 			}
 			else {
 				break;
 			}
 		}
-		arr[j + 1] = insData;  // <<ÀÌµ¿>> 1»çÀÌÅ¬´ç 1¹ø
+		arr[j + 1] = insData;  // <<ì´ë™>> 1ì‚¬ì´í´ë‹¹ 1ë²ˆ
 	}
 }
 
