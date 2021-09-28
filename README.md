@@ -1,6 +1,6 @@
 # C_ProblemSolving
 
-Study algorithms and solve problems with C
+Study algorithms and solve problems on BOJ with C
 
 [Coding Blog](https://blog.naver.com/ahchjang)   
 [solved.ac.tier](https://solved.ac/profile/ahchjang)
