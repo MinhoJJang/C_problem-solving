@@ -20,6 +20,7 @@ void printarr(int arr[], int len) {
 	while (idx != len) {
 		printf("%d ", arr[idx]);
 		idx++;
+		
 	}
 
 	printf("\n");
