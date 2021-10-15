@@ -5,15 +5,15 @@
 #pragma warning(disable:4477) 
 
 /*
-»ó±ÙÀÌ´Â Ã¢°í¿¡¼­ ¸µ N°³¸¦ ¹ß°ßÇß´Ù. »ó±ÙÀÌ´Â °¢°¢ÀÇ ¸µÀÌ ¾Õ¿¡ ÀÖ´Â ¸µ°ú µÚ¿¡ ÀÖ´Â ¸µ°ú Á¢ÇÏµµ·Ï ¹Ù´Ú¿¡ ³»·Á³õ¾Ò´Ù.
+ìƒê·¼ì´ëŠ” ì°½ê³ ì—ì„œ ë§ Nê°œë¥¼ ë°œê²¬í–ˆë‹¤. ìƒê·¼ì´ëŠ” ê°ê°ì˜ ë§ì´ ì•žì— ìžˆëŠ” ë§ê³¼ ë’¤ì— ìžˆëŠ” ë§ê³¼ ì ‘í•˜ë„ë¡ ë°”ë‹¥ì— ë‚´ë ¤ë†“ì•˜ë‹¤.
 
-»ó±ÙÀÌ´Â Ã¹ ¹øÂ° ¸µÀ» µ¹¸®±â ½ÃÀÛÇß°í, ³ª¸ÓÁö ¸µµµ °°ÀÌ µ¹¾Æ°£´Ù´Â »ç½ÇÀ» ¹ß°ßÇß´Ù. ³ª¸ÓÁö ¸µÀº Ã¹ ¹øÂ° ¸µ º¸´Ù ºü¸£°Ô µ¹¾Æ°¡±âµµ Çß°í, ´À¸®°Ô µ¹¾Æ°¡±âµµ Çß´Ù. ÀÌ·¸°Ô ¸µÀ» µ¹¸®´Ù º¸´Ï Ã¹ ¹øÂ° ¸µÀ» ÇÑ ¹ÙÄû µ¹¸®¸é, ³ª¸ÓÁö ¸µÀº ¸î ¹ÙÄû µµ´ÂÁö ±Ã±ÝÇØÁ³´Ù.
+ìƒê·¼ì´ëŠ” ì²« ë²ˆì§¸ ë§ì„ ëŒë¦¬ê¸° ì‹œìž‘í–ˆê³ , ë‚˜ë¨¸ì§€ ë§ë„ ê°™ì´ ëŒì•„ê°„ë‹¤ëŠ” ì‚¬ì‹¤ì„ ë°œê²¬í–ˆë‹¤. ë‚˜ë¨¸ì§€ ë§ì€ ì²« ë²ˆì§¸ ë§ ë³´ë‹¤ ë¹ ë¥´ê²Œ ëŒì•„ê°€ê¸°ë„ í–ˆê³ , ëŠë¦¬ê²Œ ëŒì•„ê°€ê¸°ë„ í–ˆë‹¤. ì´ë ‡ê²Œ ë§ì„ ëŒë¦¬ë‹¤ ë³´ë‹ˆ ì²« ë²ˆì§¸ ë§ì„ í•œ ë°”í€´ ëŒë¦¬ë©´, ë‚˜ë¨¸ì§€ ë§ì€ ëª‡ ë°”í€´ ë„ëŠ”ì§€ ê¶ê¸ˆí•´ì¡Œë‹¤.
 
-¸µÀÇ ¹ÝÁö¸§ÀÌ ÁÖ¾îÁø´Ù. ÀÌ¶§, Ã¹ ¹øÂ° ¸µÀ» ÇÑ ¹ÙÄû µ¹¸®¸é, ³ª¸ÓÁö ¸µÀº ¸î ¹ÙÄû µ¹¾Æ°¡´ÂÁö ±¸ÇÏ´Â ÇÁ·Î±×·¥À» ÀÛ¼ºÇÏ½Ã¿À.
+ë§ì˜ ë°˜ì§€ë¦„ì´ ì£¼ì–´ì§„ë‹¤. ì´ë•Œ, ì²« ë²ˆì§¸ ë§ì„ í•œ ë°”í€´ ëŒë¦¬ë©´, ë‚˜ë¨¸ì§€ ë§ì€ ëª‡ ë°”í€´ ëŒì•„ê°€ëŠ”ì§€ êµ¬í•˜ëŠ” í”„ë¡œê·¸ëž¨ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 */
 
 /*
-Ã¹¹ø¤Š ¼ö¸¦ ºÐÀÚ·Î µÎ°í, µÚ¿¡¼ö¸¦ ºÐ¸ð·Î µÎ°í ±× ºÐ¼ö¸¦ ÃÖ´ëÇÑ ¾àºÐÇÑ °ªÀÌ °ð ´äÀÔ 
+ì²«ë²ˆì¨° ìˆ˜ë¥¼ ë¶„ìžë¡œ ë‘ê³ , ë’¤ì—ìˆ˜ë¥¼ ë¶„ëª¨ë¡œ ë‘ê³  ê·¸ ë¶„ìˆ˜ë¥¼ ìµœëŒ€í•œ ì•½ë¶„í•œ ê°’ì´ ê³§ ë‹µìž… 
 */
 #define MAX 105
 #define TRUE 1
@@ -22,7 +22,7 @@
 int arr[MAX] = { 0 };
 int n;
 
-// µ¥ÀÌÅÍ°ª ³Ö±â 
+// ë°ì´í„°ê°’ ë„£ê¸° 
 void putData() {
 
 	scanf("%d", &n);
@@ -32,7 +32,7 @@ void putData() {
 	}
 }
 
-// ¼ýÀÚÀÇ Àý´ñ°ª 
+// ìˆ«ìžì˜ ì ˆëŒ“ê°’ 
 int abs(int x) {
 	if (x < 0) {
 		return -x;
@@ -45,35 +45,35 @@ int printCurrentAnswer(int a, int b) {
 	return 0;
 }
 
-// ¾à¼ö Ã£´Â ÇÔ¼ö 
-// ÀÌ¶§ a´Â Ç×»ó arr[0] ÀÌ´Ù. 
+// ì•½ìˆ˜ ì°¾ëŠ” í•¨ìˆ˜ 
+// ì´ë•Œ aëŠ” í•­ìƒ arr[0] ì´ë‹¤. 
 int findAliquot(int a, int b) {
 
-	int aliquot[MAX] = { 0 }; // ¾à¼öÀúÀåÇÏ´Â ¹è¿­ 
-	int idx = 0; // À§ ¹è¿­ÀÇ ÀÎµ¦½º 
-	int flag = FALSE; // ³ª´©¾î ¶³¾îÁöÁö ¾ÊÀ¸¸é FALSE, ³ª´©¾î ¶³¾îÁö¸é TRUE
-	int mom = a; // ºÐ¸ð
-	int son = b; // ºÐÀÚ 
+	int aliquot[MAX] = { 0 }; // ì•½ìˆ˜ì €ìž¥í•˜ëŠ” ë°°ì—´ 
+	int idx = 0; // ìœ„ ë°°ì—´ì˜ ì¸ë±ìŠ¤ 
+	int flag = FALSE; // ë‚˜ëˆ„ì–´ ë–¨ì–´ì§€ì§€ ì•Šìœ¼ë©´ FALSE, ë‚˜ëˆ„ì–´ ë–¨ì–´ì§€ë©´ TRUE
+	int mom = a; // ë¶„ëª¨
+	int son = b; // ë¶„ìž 
 
-	// 1. µÎ ¼öÀÇ Â÷ÀÇ Àý´ñ°ªÀ» ±¸ÇÑ´Ù. 
+	// 1. ë‘ ìˆ˜ì˜ ì°¨ì˜ ì ˆëŒ“ê°’ì„ êµ¬í•œë‹¤. 
 	int diff = abs(a - b);
 
-	// ¸¸¾à ¼öÀÇ Â÷ÀÌ°¡ 0ÀÏ °æ¿ì, ´äÀº Ç×»ó 1/1ÀÌ¹Ç·Î 
+	// ë§Œì•½ ìˆ˜ì˜ ì°¨ì´ê°€ 0ì¼ ê²½ìš°, ë‹µì€ í•­ìƒ 1/1ì´ë¯€ë¡œ 
 	if (diff == 0) {
 		return printCurrentAnswer(1, 1);
 	}
 
-	// 2. ±× Àý´ñ°ªÀÇ ¾à¼ö¸¦ ¹è¿­¿¡ ÀúÀåÇÑ´Ù. ¾à¼ö´Ï±î i´Â 2ºÎÅÍ ½ÃÀÛ
-	// ¼ýÀÚ°¡ Å©¸é Æ¯¼öÇÏ°Ô Ã£À»·Á°í ÇßÁö¸¸ 1000Á¤µµ¸é ±×³É for¹® µ¹·Áµµ ¹«¹æÇÏ´Ù°í »ý°¢ÇßÀ½ 
+	// 2. ê·¸ ì ˆëŒ“ê°’ì˜ ì•½ìˆ˜ë¥¼ ë°°ì—´ì— ì €ìž¥í•œë‹¤. ì•½ìˆ˜ë‹ˆê¹Œ iëŠ” 2ë¶€í„° ì‹œìž‘
+	// ìˆ«ìžê°€ í¬ë©´ íŠ¹ìˆ˜í•˜ê²Œ ì°¾ì„ë ¤ê³  í–ˆì§€ë§Œ 1000ì •ë„ë©´ ê·¸ëƒ¥ forë¬¸ ëŒë ¤ë„ ë¬´ë°©í•˜ë‹¤ê³  ìƒê°í–ˆìŒ 
 	for (int i = 2; i <= diff; i++) {
 		if (diff % i == 0) {
 			aliquot[idx++] = i;
 		}
 	}
 
-	// 3. a,b°¡ ³ª´©¾î ¶³¾îÁú ¶§±îÁö ¾à¼ö·Î ³ª´«´Ù...
-	// - ¸¸¾à ³ª´©¾î ¶³¾îÁöÁö ¾ÊÀ¸¸é, ±×³É a,b¸¦ ¸®ÅÏÇÑ´Ù. 
-	// - ³ª´©¾î ¶³¾îÁö¸é, flag¸¦ ¼¼¿ì°í, ÀÏ´Ü for¹® ³¡±îÁö ´Ù ³ª´©°í ³ª¼­ ´Ù½Ã ÇÔ¼ö¸¦ È£ÃâÇÑ´Ù. ÀÌ¶§, ºÐÀÚ È¤Àº ºÐ¸ð°¡ 1ÀÌ¸é ÇÔ¼öÈ£ÃâÀº »ý·«ÇÑ´Ù. 
+	// 3. a,bê°€ ë‚˜ëˆ„ì–´ ë–¨ì–´ì§ˆ ë•Œê¹Œì§€ ì•½ìˆ˜ë¡œ ë‚˜ëˆˆë‹¤...
+	// - ë§Œì•½ ë‚˜ëˆ„ì–´ ë–¨ì–´ì§€ì§€ ì•Šìœ¼ë©´, ê·¸ëƒ¥ a,bë¥¼ ë¦¬í„´í•œë‹¤. 
+	// - ë‚˜ëˆ„ì–´ ë–¨ì–´ì§€ë©´, flagë¥¼ ì„¸ìš°ê³ , ì¼ë‹¨ forë¬¸ ëê¹Œì§€ ë‹¤ ë‚˜ëˆ„ê³  ë‚˜ì„œ ë‹¤ì‹œ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•œë‹¤. ì´ë•Œ, ë¶„ìž í˜¹ì€ ë¶„ëª¨ê°€ 1ì´ë©´ í•¨ìˆ˜í˜¸ì¶œì€ ìƒëžµí•œë‹¤. 
 	for (int i = 0; i < idx; i++) {
 		if (mom % aliquot[i] == 0 && son % aliquot[i] == 0) {
 			mom /= aliquot[i];
@@ -99,12 +99,12 @@ void printAns(int n) {
 	int sonidx = 1;
 
 	while (sonidx != n) {
-		// ansÀÇ 0¹øÂ° ÀÎµ¦½º´Â ¾ø´Ù°í Ä¡°í.. 
-		// arr[0] / arr[1], arr[0] / arr[2] ... ÀÌ·¸°Ô.. 
+		// ansì˜ 0ë²ˆì§¸ ì¸ë±ìŠ¤ëŠ” ì—†ë‹¤ê³  ì¹˜ê³ .. 
+		// arr[0] / arr[1], arr[0] / arr[2] ... ì´ë ‡ê²Œ.. 
 
-		// 1. ÀÏ´Ü ºÐÀÚ ºÐ¸ð »çÀÌ¿¡ °øÅëÀÎ¼ö°¡ ÀÖ´ÂÁö ¾Ë¾Æ¾ß ÇÑ´Ù. 
-		// ÇÔ¼ö¸¦ ¸¸µéÀÚ
-		// ±×¸®°í ÀÏ´Ü ºÐÀÚ³ª ºÐ¸ð°¡ 1ÀÌ°Å³ª ºÐÀÚ¿Í ºÐ¸ðÀÇ Â÷°¡ 1ÀÌ¸é ³ª´©¾î ¶³¾îÁú ¸®°¡ ¾øÀ¸¹Ç·Î ÀÌ °æ¿ì´Â Á¦¿Ü 
+		// 1. ì¼ë‹¨ ë¶„ìž ë¶„ëª¨ ì‚¬ì´ì— ê³µí†µì¸ìˆ˜ê°€ ìžˆëŠ”ì§€ ì•Œì•„ì•¼ í•œë‹¤. 
+		// í•¨ìˆ˜ë¥¼ ë§Œë“¤ìž
+		// ê·¸ë¦¬ê³  ì¼ë‹¨ ë¶„ìžë‚˜ ë¶„ëª¨ê°€ 1ì´ê±°ë‚˜ ë¶„ìžì™€ ë¶„ëª¨ì˜ ì°¨ê°€ 1ì´ë©´ ë‚˜ëˆ„ì–´ ë–¨ì–´ì§ˆ ë¦¬ê°€ ì—†ìœ¼ë¯€ë¡œ ì´ ê²½ìš°ëŠ” ì œì™¸ 
 		if (arr[0] == 1 || arr[sonidx] == 1 || abs(arr[0] - arr[sonidx]) == 1) {
 			printCurrentAnswer(arr[0], arr[sonidx]);
 		}
@@ -121,4 +121,4 @@ int main() {
 	printAns(n);
 
 	return 0;
-} // ¸Â¾Ò½À´Ï´Ù!
+} // ë§žì•˜ìŠµë‹ˆë‹¤!
