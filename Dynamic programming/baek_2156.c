@@ -28,6 +28,16 @@
 
 즉 비교대상 -> n번째 포도주를 고를 때라고 생각하면, n-2 와 n을 비교하고, 그 중에 큰 값을 x라 한 뒤, x와 n-3+n-n-2를 비교한다. 
 
+아냐아냐 
+
+이 포도주 잔을 선택할 경우와 선택하지 않을 경우 두가지를 구하자. 
+
+그럼 예제에서
+fn     선택함     선택하지 않음
+         6             0
+        16             6       ->fn(n-1)의 최댓값 
+        23            16
+
 
 
 예제도 마찬가지
@@ -43,8 +53,61 @@
 
 */
 
+#define MAX 10005
 
+int maxSum[MAX];
+int wine[MAX];
+
+//와인값 입력함수
+void inputNum(int N) {
+	for (int i = 1; i < N+1; i++) {
+		scanf("%d", &wine[i]);
+	}
+}
+
+// N번째 와인까지의 최댓값을 구하는 함수
+int fn(int N) {
+
+	if (N == 1) {
+		maxSum[N] = wine[N];
+	}
+	else if (N == 2) {
+		maxSum[N] = wine[N] + wine[N-1];
+	}
+	else if (N == 3) {
+		maxSum[N] = (wine[N - 2] >= wine[N - 1]) ? wine[N - 2] + wine[N] : wine[N - 1] + wine[N];
+	}
+	// N이 3초과이고 maxSum값을 모르면..
+	else if( maxSum[N] == 0){
+        // 지금 비교해야 할 값은, fn(N-1), fn(N-2) + wine[N], fn(N-3) + wine[N-1]+wine[N] 이거임
+
+        int biggerOne = fn(N-1);
+
+        if(biggerOne <= fn(N-2) + wine[N]){
+            biggerOne = fn(N-2) + wine[N];
+        }
+
+        if(biggerOne <= fn(N-3) + wine[N-1]+wine[N]){
+            biggerOne = fn(N-3) + wine[N-1]+wine[N];
+        }
+
+        if(biggerOne <= fn(N-4) + wine[N-1]+wine[N] && N > 4){
+            biggerOne = fn(N-4) + wine[N-1]+wine[N];
+        }
+    
+        maxSum[N] = biggerOne;
+
+	}
+	return maxSum[N];
+}
 
 int main(){
 
+    int N;
+	scanf("%d", &N);
+
+	inputNum(N);
+	printf("%d", fn(N));
+
+	return 0;
 }
