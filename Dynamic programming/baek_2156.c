@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#pragma warning(disable:4996) 
 // 효주는 포도주 시식회에 갔다. 그 곳에 갔더니, 테이블 위에 다양한 포도주가 들어있는 포도주 잔이 일렬로 놓여 있었다. 효주는 포도주 시식을 하려고 하는데, 여기에는 다음과 같은 두 가지 규칙이 있다.
 
 // 포도주 잔을 선택하면 그 잔에 들어있는 포도주는 모두 마셔야 하고, 마신 후에는 원래 위치에 다시 놓아야 한다.
@@ -13,54 +13,14 @@
 // 첫째 줄에 포도주 잔의 개수 n이 주어진다. (1≤n≤10,000) 둘째 줄부터 n+1번째 줄까지 포도주 잔에 들어있는 포도주의 양이 순서대로 주어진다. 포도주의 양은 1,000 이하의 음이 아닌 정수이다.
 
 
-// n이 3보다 작을 때에는 당연히 0,1번을 택한다. 그러나 3이상일 경우, 3가지 경우가 생긴다. 
-
-// 일단, n-1까지의 최댓값 + n이 사실 가능한 최대의 숫자이다. 그러나 3개 이상 연달아 마실 수 없기 때문에, 경우의 수를 두자.
-
-// 만약 1을 선택, 0을 선택하지 않은 포도주라 할 때,
-
-/*
-
-010 '11? '
-이런 상태라고 해보자. 무조건 11이 있다는 소리는 그 앞의 것을 택하지 않았다는 소리이니까, '101', '011', '110' 셋 중 하나를 선택해 가장 큰 값을 골라야 한다. 
-
-그런데 또 이때, 만약 '011'을 선택한다면, 011앞의 숫자도 선택할 수 있어지게 된다. 즉 최종적으로 아다리 잘 맞으면 011011 이렇게 되는 것. 그러니까 비교대상이 101, 110, 그리고 1011 이렇게 되어야 한다. 아 근데 이때도 n-3번째 숫자 택하기 전에, 그 앞에 11이 있는지 확인해야한다. 
-
-즉 비교대상 -> n번째 포도주를 고를 때라고 생각하면, n-2 와 n을 비교하고, 그 중에 큰 값을 x라 한 뒤, x와 n-3+n-n-2를 비교한다. 
-
-아냐아냐 
-
-이 포도주 잔을 선택할 경우와 선택하지 않을 경우 두가지를 구하자. 
-
-그럼 예제에서
-fn     선택함     선택하지 않음
-         6             0
-        16             6       ->fn(n-1)의 최댓값 
-        23            16
-
-
-
-예제도 마찬가지
-6 10 13 9 8 1 에서, 
-6
-6 10
-- 10 13
-6 -- 13 9  여기서도 011에서 1011꼴로 바뀌었다
-6 10 -- 9 8  여기도 마찬가지.... 
-
-저렇게 바뀌는 걸 함수로 어떻게 표현할까???
-
-
-*/
-
 #define MAX 10005
 
-int maxSum[MAX];
-int wine[MAX];
+int maxSum[MAX] = { 0 };
+int wine[MAX] = { 0 };
 
 //와인값 입력함수
 void inputNum(int N) {
-	for (int i = 1; i < N+1; i++) {
+	for (int i = 1; i < N + 1; i++) {
 		scanf("%d", &wine[i]);
 	}
 }
@@ -68,46 +28,60 @@ void inputNum(int N) {
 // N번째 와인까지의 최댓값을 구하는 함수
 int fn(int N) {
 
-	if (N == 1) {
-		maxSum[N] = wine[N];
+	if (maxSum[N] == 0) {
+
+		if (N == 1) {
+			maxSum[N] = wine[N];
+		}
+		else if (N == 2) {
+			maxSum[N] = wine[N] + wine[N - 1];
+		}
+		else if (maxSum[N] == 0 && N >= 3) {
+			/*
+			1. fn(N-1), 
+			2. fn(N-2) + wine[N],
+			3. fn(N-3) + wine[N-1]+wine[N], 
+			4. fn(N - 4) + wine[N - 1] + wine[N] 
+
+			이 넷 중에서 가장 큰 값을 골라야 한다. 
+			*/
+
+			int biggerOne = fn(N - 1);
+
+			// 놓친점1. wine값이 0이면 계산이 오래걸림. 0이면 더하나 안더하나 값은 같은데 계산을 시키니 당연히 시간초과... 
+			if (wine[N] == 0) {
+				maxSum[N] = biggerOne;
+				return maxSum[N];
+			}
+
+			if (biggerOne <= fn(N - 2) + wine[N]) {
+				biggerOne = fn(N - 2) + wine[N];
+			}
+
+			if (biggerOne <= fn(N - 3) + wine[N - 1] + wine[N]) {
+				biggerOne = fn(N - 3) + wine[N - 1] + wine[N];
+			}
+
+			if (N > 4) {
+				if (biggerOne <= fn(N - 4) + wine[N - 1] + wine[N]) {
+					biggerOne = fn(N - 4) + wine[N - 1] + wine[N];
+				}
+			}
+
+			maxSum[N] = biggerOne;
+		}
 	}
-	else if (N == 2) {
-		maxSum[N] = wine[N] + wine[N-1];
-	}
-	else if (N == 3) {
-		maxSum[N] = (wine[N - 2] >= wine[N - 1]) ? wine[N - 2] + wine[N] : wine[N - 1] + wine[N];
-	}
-	// N이 3초과이고 maxSum값을 모르면..
-	else if( maxSum[N] == 0){
-        // 지금 비교해야 할 값은, fn(N-1), fn(N-2) + wine[N], fn(N-3) + wine[N-1]+wine[N] 이거임
 
-        int biggerOne = fn(N-1);
-
-        if(biggerOne <= fn(N-2) + wine[N]){
-            biggerOne = fn(N-2) + wine[N];
-        }
-
-        if(biggerOne <= fn(N-3) + wine[N-1]+wine[N]){
-            biggerOne = fn(N-3) + wine[N-1]+wine[N];
-        }
-
-        if(biggerOne <= fn(N-4) + wine[N-1]+wine[N] && N > 4){
-            biggerOne = fn(N-4) + wine[N-1]+wine[N];
-        }
-    
-        maxSum[N] = biggerOne;
-
-	}
 	return maxSum[N];
 }
 
-int main(){
+int main() {
 
-    int N;
+	int N;
 	scanf("%d", &N);
 
 	inputNum(N);
 	printf("%d", fn(N));
 
 	return 0;
-}
+} // 맞았습니다!!! 
