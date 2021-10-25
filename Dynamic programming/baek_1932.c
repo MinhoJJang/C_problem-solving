@@ -95,7 +95,7 @@ int returnBigOne(int a, int b) {
 
 // N = 1 부터 시작해서 입력받은 N까지 계속 구한다. 
 void saveEveryMaxSum(int N, int inputN) {
-	
+	 
 	while (N != inputN+1) {
 		// 일단 당연히, 삼각형 맨 위에서는 그 숫자가 최대합이다. 
 		if (N == 1) {
