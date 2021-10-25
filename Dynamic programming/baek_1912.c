@@ -29,7 +29,7 @@ typedef struct _heap
 	HData *heapArr; // 동적메모리로 구현
 	fnPriorityComp *comp; // 우선순위 비교함수 
 	// 함수타입 포인터 comp
-} Heap;
+} Heap; 
 
 // 힙정렬
 Heap *g_hp;
