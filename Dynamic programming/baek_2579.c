@@ -8,14 +8,14 @@
 int maxSum[MAX];
 int wine[MAX];
 
-//°è´Ü°ª ÀÔ·ÂÇÔ¼ö
+//ê³„ë‹¨ê°’ ì…ë ¥í•¨ìˆ˜
 void inputNum(int N) {
 	for (int i = 1; i < N+1; i++) {
 		scanf("%d", &wine[i]);
 	}
 }
 
-// N¹øÂ° °è´Ü±îÁöÀÇ ÃÖ´ñ°ªÀ» ±¸ÇÏ´Â ÇÔ¼ö
+// Në²ˆì§¸ ê³„ë‹¨ê¹Œì§€ì˜ ìµœëŒ“ê°’ì„ êµ¬í•˜ëŠ” í•¨ìˆ˜
 int fn(int N) {
 
 	if (N == 1) {
@@ -27,11 +27,11 @@ int fn(int N) {
 	else if (N == 3) {
 		maxSum[N] = (wine[N - 2] >= wine[N - 1]) ? wine[N - 2] + wine[N] : wine[N - 1] + wine[N];
 	}
-	// NÀÌ 3ÃÊ°úÀÌ°í maxSum°ªÀ» ¸ğ¸£¸é..
+	// Nì´ 3ì´ˆê³¼ì´ê³  maxSumê°’ì„ ëª¨ë¥´ë©´..
 	else if( maxSum[N] == 0){
 		maxSum[N] = (fn(N - 2) > fn(N - 3) + wine[N - 1]) ? maxSum[N - 2] + wine[N] : maxSum[N - 3] + wine[N - 1] + wine[N];
 	}
-	return maxSum[N];
+	return maxSum[N]; 
 }
 
 
@@ -46,4 +46,4 @@ int main() {
 	return 0;
 }
 
-// ÀÌ¹®Á¦´Â ÁøÂ¥ ¾µ°Ô¸¹°Ú´Ù^^ 
+// ì´ë¬¸ì œëŠ” ì§„ì§œ ì“¸ê²Œë§ê² ë‹¤^^ 
