@@ -13,7 +13,7 @@ N의 소인수분해 결과를 한 줄에 하나씩 오름차순으로 출력한
 
 #define PRIME 0
 #define NOTPRIME -1
-#define MAX 3165 // sqrt 10000000 = 3162.2776...
+#define MAX 3165 // sqrt 10,000,000 = 3162.2776...
 
 int n = 0;
 int arr[MAX] = { PRIME }; // 전부 PRIME 이라고 가정 
@@ -42,8 +42,8 @@ void mainLogic() {
 	int currentPrime = findNextPrime(1);
 
 	// 체 거르기
-	int Maxprime = (int)sqrt(MAX)+1;
-	while (currentPrime <= Maxprime) {
+	int maxPrime = (int)sqrt(MAX)+1;
+	while (currentPrime <= maxPrime) {
 		for (int i = currentPrime; i*currentPrime <= MAX; i++) {
 			arr[i*currentPrime] = NOTPRIME;
 		}
@@ -72,3 +72,5 @@ int main(){
 
     return 0;
 }
+
+// Out of Bounds???????????? 
