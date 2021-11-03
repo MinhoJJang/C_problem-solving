@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <math.h>
-#pragma warning (disable:4996)
-/*
+
+/* 
 정수 N이 주어졌을 때, 소인수분해하는 프로그램을 작성하시오.
 
 입력
@@ -14,7 +13,7 @@ N의 소인수분해 결과를 한 줄에 하나씩 오름차순으로 출력한
 
 #define PRIME 0
 #define NOTPRIME -1
-#define MAX 10000005 // sqrt 10,000,000 = 3162.2776...
+#define MAX 3165 // sqrt 10,000,000 = 3162.2776...
 
 int n = 0;
 int arr[MAX] = { PRIME }; // 전부 PRIME 이라고 가정 
@@ -23,7 +22,7 @@ void putData() {
 	scanf("%d", &n);
 }
 
-int findNextPrime(int a) {
+int searchNextPrime(int a) {
 	int primeIdx = a + 1;
 	while (arr[primeIdx] != PRIME) {
 		primeIdx++;
@@ -31,7 +30,7 @@ int findNextPrime(int a) {
 	return primeIdx;
 }
 
-void mainLogic(int n) {
+void mainLogic() {
 
 	// 0, 1은 소수가 아님
 	// 1-based 배열
@@ -40,40 +39,37 @@ void mainLogic(int n) {
 
 	// 가장 마지막으로 조사한 수 
 	// 일단 위에서 1까지 조사했으니까
-	int currentPrime = findNextPrime(1);
+	int currentPrime = searchNextPrime(1);
 
 	// 체 거르기
-	int maxPrime = sqrt(n);
+	int maxPrime = (int)sqrt(MAX)+1;
 	while (currentPrime <= maxPrime) {
-		for (int i = currentPrime; i*currentPrime <= n; i++) {
-			// 여기서 OutOfBounds 오류 발생.
-			// i*currentPrime의 최댓값에 주의
+		for (int i = currentPrime; i*currentPrime <= MAX; i++) {
 			arr[i*currentPrime] = NOTPRIME;
 		}
-		currentPrime = findNextPrime(currentPrime);
+		currentPrime = searchNextPrime(currentPrime);
 	}
 }
 
-void mainFunction(int input) {
-	int currentPrime = 2;
+void mainFunction(int input){
+    int currentPrime = 2;
 
-	while (input != 1) {
-		if (input % currentPrime == 0) {
-			input /= currentPrime;
-			printf("%d\n", currentPrime);
-			continue;
-		}
-		currentPrime = findNextPrime(currentPrime);
-	}
+    while(input != 1){
+        if(input % currentPrime == 0){
+            input /= currentPrime;
+            printf("%d\n", currentPrime);
+            continue;
+        }
+        currentPrime = searchNextPrime(currentPrime);
+    }
 }
 
-int main() {
+int main(){
 
-	putData();
-	mainLogic(n);
-	mainFunction(n);
+    putData();
+    mainLogic();
+    mainFunction(n);
 
-	return 0;
+    return 0;
 }
-
-// 맞았습니다!
+// 맞았습니다 

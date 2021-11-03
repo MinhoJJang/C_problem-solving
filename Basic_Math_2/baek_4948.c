@@ -51,7 +51,7 @@ void putData() {
 	}
 }
 
-int findNextPrime(int a) {
+int searchNextPrime(int a) {
 	int primeIdx = a + 1;
 	while (arr[primeIdx] != PRIME) {
 		primeIdx++;
@@ -68,7 +68,7 @@ void mainLogic() {
 
 	// 가장 마지막으로 조사한 수 
 	// 일단 위에서 1까지 조사했으니까
-	int currentPrime = findNextPrime(1);
+	int currentPrime = searchNextPrime(1);
 	//int flag = pow(currentPrime, 2);
 	// 체 거르기
 	int Maxprime = (int)sqrt(MAX);
@@ -76,7 +76,7 @@ void mainLogic() {
 		for (int i = currentPrime; i*currentPrime <= MAX; i++) {
 			arr[i*currentPrime] = NOTPRIME;
 		}
-		currentPrime = findNextPrime(currentPrime);
+		currentPrime = searchNextPrime(currentPrime);
 	}
 }
 

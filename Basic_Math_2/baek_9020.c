@@ -52,7 +52,7 @@ void putData() {
 	}
 }
 
-int findNextPrime(int a) {
+int searchNextPrime(int a) {
 	int primeIdx = a + 1;
 	while (arr[primeIdx] != PRIME) {
 		primeIdx++;
@@ -69,15 +69,15 @@ void mainLogic() {
 
 	// 가장 마지막으로 조사한 수 
 	// 일단 위에서 1까지 조사했으니까
-	int currentPrime = findNextPrime(1);
-	//int flag = pow(currentPrime, 2);
+	int currentPrime = searchNextPrime(1);
+	
 	// 체 거르기
 	int Maxprime = (int)sqrt(MAX);
 	while (currentPrime <= Maxprime) {
 		for (int i = currentPrime; i*currentPrime <= MAX; i++) {
 			arr[i*currentPrime] = NOTPRIME;
 		}
-		currentPrime = findNextPrime(currentPrime);
+		currentPrime = searchNextPrime(currentPrime);
 	}
 }
 
@@ -95,7 +95,7 @@ void findPartition(int inputNum){
             answer[ansIdx][BIGONE] = inputNum-currentPrime;
         }
         // 차이값이 소수가 아니라면 현재 소수값을 다음 소수값으로 바꿔준다
-        currentPrime = findNextPrime(currentPrime);
+        currentPrime = searchNextPrime(currentPrime);
     }
     ansIdx++;
 }

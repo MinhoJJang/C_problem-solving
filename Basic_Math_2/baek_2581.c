@@ -9,13 +9,13 @@
 
 int arr[MAX] = { PRIME }; // 전부 PRIME 이라고 가정 
 
-int low, high;
+int son, mom;
 
 void putData() {
-	scanf("%d%d", &low, &high);
+	scanf("%d%d", &son, &mom);
 }
 
-int findNextPrime(int a) {
+int searchNextPrime(int a) {
 	int primeIdx = a + 1;
 	while (arr[primeIdx] != PRIME) {
 		primeIdx++;
@@ -32,15 +32,15 @@ void mainLogic() {
 
 	// 가장 마지막으로 조사한 수 
 	// 일단 위에서 1까지 조사했으니까
-	int currentPrime = findNextPrime(1);
+	int currentPrime = searchNextPrime(1);
 
 	// 체 거르기
-	int Maxprime = (int)sqrt(high);
+	int Maxprime = (int)sqrt(mom);
 	while (currentPrime <= Maxprime) {
-		for (int i = currentPrime; i*currentPrime <= high; i++) {
+		for (int i = currentPrime; i*currentPrime <= mom; i++) {
 			arr[i*currentPrime] = NOTPRIME;
 		}
-		currentPrime = findNextPrime(currentPrime);
+		currentPrime = searchNextPrime(currentPrime);
 	}
 }
 
@@ -49,7 +49,7 @@ int lowestPrime;
 int primeSum = 0;
 
 void findAllPrime() {
-	for (int currentNum = low; currentNum <= high; currentNum++) {
+	for (int currentNum = son; currentNum <= mom; currentNum++) {
 		if (arr[currentNum] == PRIME) {
 			primeCount++;
 			if (primeCount == 1) {
