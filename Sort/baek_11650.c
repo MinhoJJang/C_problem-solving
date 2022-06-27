@@ -48,7 +48,6 @@ int Partition(cord arr[], int left, int right)
 		}
 
 		// high 좌측 이동, pivot 보다 작은 것을 만날때까지!
-		// 오류있었음 (high인데 low라 적엇음)
 		while (arr[high].x >= pivot && high >= (left + 1))
 		{
 			high--;
