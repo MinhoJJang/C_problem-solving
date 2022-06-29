@@ -21,7 +21,7 @@ z = 122
 #define ALPHABET 26
 #define EXIST 1
 #define NOTEXIST 0
-#define MAX 100000
+#define MAX 500000
 
 struct TRIE;
 
@@ -68,6 +68,12 @@ void trie_push(trie *root, char *input)
     }
     else
     {
+        // 예외 찾음
+
+        /*
+            ex. a, aa, aaa넣으면 aa자리에 aaa가 들어간다. 하....ㅠㅠ
+        */
+
         // 2. 알파벳이 들어갈 자리가 없다 -> 같은 알파벳으로 시작하는 영단어가 2개이다. 그럼 그 다음 글자를 비교한다.
 
         // 먼저, 해당 노드에서 next trie를 만든다.
@@ -106,33 +112,89 @@ void trie_push(trie *root, char *input)
     }
 }
 
-void trie_search(trie *root, char *input)
+int existCount = 0;
+char *sameData[MAX] = {0};
+
+void trie_search(trie *root, char *search)
 {
     // 해당 영단어가 있는지 확인하려면, 영단어의 각 단어마다 trie가 연결되어 있는지 확인하면 된다.
-    int len = strlen(input);
-    int idx = input[root->depth] - 97;
-    for (int i = 0; i < len; i++)
+    int len = strlen(search);
+    int idx = search[root->depth] - 97;
+
+    // 일단, arr이 NULL이 아니어야 한다. NULL이라면 바로 컷
+    if (root->arr[idx] == NULL)
     {
-        // 일단, arr이 NULL이 아니어야 한다. NULL이라면 바로 컷
-        root->arr[idx]
+
+        return;
+    }
+    else
+    {
+        // 해당 공간에 데이터가 존재할 경우 비교해본다. 같다면 그냥 EXIST 해주면 되고, 같지 않을 경우 길이를 비교하여, search가 더 길면 조사를 계속한다.
+        if (root->arr[idx]->isExist == EXIST)
+        {
+            if (strcmp(root->arr[idx]->data, search) == 0)
+            {
+
+                sameData[existCount] = (char *)malloc(sizeof(len));
+                strcpy(sameData[existCount], search);
+                existCount++;
+                return;
+            }
+
+            if (strlen(root->arr[idx]->data) > strlen(search))
+            {
+                return;
+            }
+        }
+        else
+        {
+            // 만약 데이터는 존재하지 않는데, 다음 노드가 존재한다면 찾아볼 수 있다.
+            if (root->arr[idx]->next == NULL)
+            {
+                return;
+            }
+            else
+            {
+                trie_search(root->arr[idx]->next, search);
+            }
+        }
+    }
+}
+
+void printData()
+{
+    printf("\n%d\n", existCount);
+    for (int i = 0; i < existCount; i++)
+    {
+        printf("%s\n", sameData[i]);
     }
 }
 
 int main()
 {
     trie *root = (trie *)malloc(sizeof(trie));
-
     trie_init(root, 0);
 
     // 문자열을 저장하는 배열
-    int num;
+    int NumberOfData;
+    int NumberOfFindingData;
     char *put;
-    scanf("%d", &num);
-    for (int i = 0; i < num; i++)
+    scanf("%d", &NumberOfData);
+    scanf("%d", &NumberOfFindingData);
+    for (int i = 0; i < NumberOfData; i++)
     {
         scanf("%s", put);
         trie_push(root, put);
     }
+
+    // 문자열 찾기
+    for (int i = 0; i < NumberOfFindingData; i++)
+    {
+        scanf("%s", put);
+        trie_search(root, put);
+    }
+
+    printData();
 
     return 0;
 }
