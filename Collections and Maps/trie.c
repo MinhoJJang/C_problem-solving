@@ -84,6 +84,14 @@ void trie_push(trie *root, char *input)
         // 예를 들어, abc와 abcd 가 있을 경우 abc는 a-b-c의 data에 저장하고 abcd는 a-b-c-d의 data에 저장하게 하기 위해서이다. 즉, 알파벳이 더이상 존재하지 않는 영단어의 경우 내려가지 않고 해당 trie의 data에 그대로 넣는다.
         // 문제 조건 상 중복되는 단어는 없다.
 
+        // 예외발생지점.
+        /*
+        3 4
+        abbbc
+        abbc
+        abbcc
+        넣었을 때 예외가 발생한다.
+        */
         if (root->arr[idx]->data[root->depth + 1] == 0 || input[root->depth + 1] == 0)
         {
             // 둘 중 하나는 NULL이라는 소리.
@@ -198,3 +206,12 @@ int main()
 
     return 0;
 }
+
+// 3 4
+// abbbc
+// abbc
+// abc
+// abc
+// aborta
+// bac
+// abbbc
