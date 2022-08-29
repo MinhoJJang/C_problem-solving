@@ -1,5 +1,5 @@
 /*
-trie를 만들자. 영단어 모음을 저장하는 trie를 만들자.
+영단어 모음을 저장하는 trie를 만들자.
 
 영단어는 26개의 알파벳으로 구성되어 있으므로, trie의 root는 26개의 알파벳으로 이루어진다.
 
@@ -82,15 +82,15 @@ void trie_push(trie *root, char *input)
 
         // 두 영단어가 다음 알파벳이 존재하는지 확인한다.
         // 예를 들어, abc와 abcd 가 있을 경우 abc는 a-b-c의 data에 저장하고 abcd는 a-b-c-d의 data에 저장하게 하기 위해서이다. 즉, 알파벳이 더이상 존재하지 않는 영단어의 경우 내려가지 않고 해당 trie의 data에 그대로 넣는다.
-        // 문제 조건 상 중복되는 단어는 없다.
+        // 문제 조건 상 중복되는 단어는 없으므로 로직 상 문제는 없다.
 
         // 예외발생지점.
         /*
         3 4
-        abbbc
-        abbc
-        abbcc
-        넣었을 때 예외가 발생한다.
+        ac
+        ad 여기까진 잘 되는데?
+        ab 넣었을 때 예외가 발생한다.
+        아마 맨 처음 a가 사라져서 그런것 같다
         */
         if (root->arr[idx]->data[root->depth + 1] == 0 || input[root->depth + 1] == 0)
         {
@@ -195,6 +195,15 @@ int main()
         trie_push(root, put);
     }
 
+    /*
+        3 3
+        ac
+        a
+        bb
+
+        하면 a까지는 문제없는데 bb에서 a가 bb로 바뀐다???
+    */
+
     // 문자열 찾기
     for (int i = 0; i < NumberOfFindingData; i++)
     {
@@ -215,3 +224,13 @@ int main()
 // aborta
 // bac
 // abbbc
+
+/*
+3 3
+ad
+ac
+ab
+ad
+ac
+ab
+*/
