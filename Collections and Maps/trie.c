@@ -185,6 +185,7 @@ void trie_search(trie *root, char *search)
     }
 }
 
+// =================== Sort ==================
 int compare(const char *a, const char *b)
 {
     return strcmp((char *)a, (char *)b);
@@ -203,7 +204,6 @@ int longestData()
     return longestLen;
 }
 
-// 답안 정렬 함수
 void sortData()
 {
     int len = longestData();
@@ -219,6 +219,7 @@ void printData()
         printf("%s\n", sameData[i]);
     }
 }
+// =================== Sort ==================
 
 int main()
 {
