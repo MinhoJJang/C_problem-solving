@@ -69,6 +69,7 @@ void trie_push(trie *root, char *input)
     else
     {
         // 예외 찾음
+        // 알파벳이 들어갈 자리는 있는데, 하위 노드가 존재한다면? 새 트리를 연결해서는 안된다.
 
         /*
             ex. a, aa, aaa넣으면 aa자리에 aaa가 들어간다. 하....ㅠㅠ
@@ -77,8 +78,12 @@ void trie_push(trie *root, char *input)
         // 2. 알파벳이 들어갈 자리가 없다 -> 같은 알파벳으로 시작하는 영단어가 2개이다. 그럼 그 다음 글자를 비교한다.
 
         // 먼저, 해당 노드에서 next trie를 만든다.
-        root->arr[idx]->next = (trie *)malloc(sizeof(trie));
-        trie_init(root->arr[idx]->next, root->depth + 1);
+        // 여기서 문제생기는듯?
+        if (root->arr[idx]->next == NULL)
+        {
+            root->arr[idx]->next = (trie *)malloc(sizeof(trie));
+            trie_init(root->arr[idx]->next, root->depth + 1);
+        }
 
         // 두 영단어가 다음 알파벳이 존재하는지 확인한다.
         // 예를 들어, abc와 abcd 가 있을 경우 abc는 a-b-c의 data에 저장하고 abcd는 a-b-c-d의 data에 저장하게 하기 위해서이다. 즉, 알파벳이 더이상 존재하지 않는 영단어의 경우 내려가지 않고 해당 trie의 data에 그대로 넣는다.
@@ -92,36 +97,45 @@ void trie_push(trie *root, char *input)
         ab 넣었을 때 예외가 발생한다.
         아마 맨 처음 a가 사라져서 그런것 같다
         */
-        if (root->arr[idx]->data[root->depth + 1] == 0 || input[root->depth + 1] == 0)
+
+        // 만약 data가 존재하지 않을 경우, 이는 그 노드 아래에 최소 두개 이상의 데이터가 존재한다는 의미가 된다.
+        if (root->arr[idx]->isExist == NOTEXIST)
         {
-            // 둘 중 하나는 NULL이라는 소리.
-            if (root->arr[idx]->data[root->depth + 1] == 0)
-            {
-                trie_push(root->arr[idx]->next, input);
-            }
-            else
-            {
-                char *data = root->arr[idx]->data;
-                root->arr[idx]->data = input;
-                trie_push(root->arr[idx]->next, data);
-            }
+            trie_push(root->arr[idx]->next, input);
         }
         else
         {
-            // 다음 알파벳이 둘 다 존재할 경우, 현재 데이터가 들어있는 data를 NOTEXIST로 변경한 후, 두 데이터를 다음 노드로 옮겨 다시 배치한다.
+            if (root->arr[idx]->data[root->depth + 1] == 0 || input[root->depth + 1] == 0)
+            {
+                // 둘 중 하나는 NULL이라는 소리.
+                if (root->arr[idx]->data[root->depth + 1] == 0)
+                {
+                    trie_push(root->arr[idx]->next, input);
+                }
+                else
+                {
+                    char *data = root->arr[idx]->data;
+                    root->arr[idx]->data = input;
+                    trie_push(root->arr[idx]->next, data);
+                }
+            }
+            else
+            {
+                // 다음 알파벳이 둘 다 존재할 경우, 현재 데이터가 들어있는 data를 NOTEXIST로 변경한 후, 두 데이터를 다음 노드로 옮겨 다시 배치한다.
 
-            char *data = root->arr[idx]->data;
-            root->arr[idx]->data = NULL;
-            trie_push(root->arr[idx]->next, data);
-            trie_push(root->arr[idx]->next, input);
+                char *data = root->arr[idx]->data;
+                root->arr[idx]->data = NULL;
+                trie_push(root->arr[idx]->next, data);
+                trie_push(root->arr[idx]->next, input);
 
-            root->arr[idx]->isExist = NOTEXIST;
+                root->arr[idx]->isExist = NOTEXIST;
+            }
         }
     }
 }
 
 int existCount = 0;
-char *sameData[MAX] = {0};
+char sameData[MAX][20] = {0};
 
 void trie_search(trie *root, char *search)
 {
@@ -132,7 +146,6 @@ void trie_search(trie *root, char *search)
     // 일단, arr이 NULL이 아니어야 한다. NULL이라면 바로 컷
     if (root->arr[idx] == NULL)
     {
-
         return;
     }
     else
@@ -142,8 +155,6 @@ void trie_search(trie *root, char *search)
         {
             if (strcmp(root->arr[idx]->data, search) == 0)
             {
-
-                sameData[existCount] = (char *)malloc(sizeof(len));
                 strcpy(sameData[existCount], search);
                 existCount++;
                 return;
@@ -152,6 +163,11 @@ void trie_search(trie *root, char *search)
             if (strlen(root->arr[idx]->data) > strlen(search))
             {
                 return;
+            }
+
+            if (strlen(root->arr[idx]->data) < strlen(search))
+            {
+                trie_search(root->arr[idx]->next, search);
             }
         }
         else
@@ -169,9 +185,35 @@ void trie_search(trie *root, char *search)
     }
 }
 
+int compare(const char *a, const char *b)
+{
+    return strcmp((char *)a, (char *)b);
+}
+
+int longestData()
+{
+    int longestLen = strlen(sameData[0]);
+    for (int i = 1; i < existCount; i++)
+    {
+        if (longestLen < strlen(sameData[i]))
+        {
+            longestLen = strlen(sameData[i]);
+        }
+    }
+    return longestLen;
+}
+
+// 답안 정렬 함수
+void sortData()
+{
+    int len = longestData();
+    qsort(sameData, existCount, 20, compare);
+}
+
 void printData()
 {
     printf("\n%d\n", existCount);
+    sortData();
     for (int i = 0; i < existCount; i++)
     {
         printf("%s\n", sameData[i]);
@@ -233,4 +275,14 @@ ab
 ad
 ac
 ab
+
+4 4
+ac
+acb
+ab
+aaa
+ac
+acb
+ab
+aaa
 */
