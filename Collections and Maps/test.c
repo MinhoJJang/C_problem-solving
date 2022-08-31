@@ -9,11 +9,11 @@ int compare(char *a, char *b)
 
 int main()
 {
-    char s1[10][8] = {
+    char s1[10][9] = {
         "india", "delta", "bravo", "kilo", "alfa",
         "echo", "hotel", "juliet", "golf", "charli"};
 
-    qsort(s1, 10, 8, compare);
+    qsort(s1, 10, 9, compare);
 
     for (int i = 0; i < 10; i++)
     {

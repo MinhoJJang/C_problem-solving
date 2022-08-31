@@ -17,11 +17,11 @@ z = 122
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
-#define WORD_MAX_LENGTH 20
+#define WORD_MAX_LENGTH 21
 #define ALPHABET 26
 #define EXIST 1
 #define NOTEXIST 0
-#define MAX 500000
+#define MAX 500001
 
 struct TRIE;
 
@@ -38,6 +38,9 @@ typedef struct TRIE
     node *arr[ALPHABET];
     int depth;
 } trie;
+
+int existCount = 0;
+char sameData[MAX][WORD_MAX_LENGTH] = {0};
 
 void trie_init(trie *root, int depth)
 {
@@ -100,7 +103,9 @@ void trie_push(trie *root, char *input)
                 }
                 else
                 {
-                    char *data = root->arr[idx]->data;
+                    char *data = malloc(sizeof(char) * WORD_MAX_LENGTH);
+                    data = root->arr[idx]->data;
+
                     root->arr[idx]->data = input;
                     trie_push(root->arr[idx]->next, data);
                 }
@@ -109,19 +114,19 @@ void trie_push(trie *root, char *input)
             {
                 // 다음 알파벳이 둘 다 존재할 경우, 현재 데이터가 들어있는 data를 NOTEXIST로 변경한 후, 두 데이터를 다음 노드로 옮겨 다시 배치한다.
 
-                char *data = root->arr[idx]->data;
+                char *data = malloc(sizeof(char) * WORD_MAX_LENGTH);
+                data = root->arr[idx]->data;
+
                 root->arr[idx]->data = NULL;
                 trie_push(root->arr[idx]->next, data);
                 trie_push(root->arr[idx]->next, input);
 
                 root->arr[idx]->isExist = NOTEXIST;
+                free(data);
             }
         }
     }
 }
-
-int existCount = 0;
-char sameData[MAX][20] = {0};
 
 void trie_search(trie *root, char *search)
 {
@@ -193,12 +198,12 @@ int longestData()
 void sortData()
 {
     int len = longestData();
-    qsort(sameData, existCount, 20, compare);
+    qsort(sameData, existCount, WORD_MAX_LENGTH, compare);
 }
 
 void printData()
 {
-    printf("\n%d\n", existCount);
+    printf("%d\n", existCount);
     sortData();
     for (int i = 0; i < existCount; i++)
     {
@@ -215,29 +220,23 @@ int main()
     // 문자열을 저장하는 배열
     int NumberOfData;
     int NumberOfFindingData;
-    char *put;
+    // char *put = malloc(sizeof(char) * WORD_MAX_LENGTH);
     scanf("%d", &NumberOfData);
     scanf("%d", &NumberOfFindingData);
     for (int i = 0; i < NumberOfData; i++)
     {
+        char *put = malloc(sizeof(char) * WORD_MAX_LENGTH);
         scanf("%s", put);
         trie_push(root, put);
+        free(put);
     }
 
-    /*
-        3 3
-        ac
-        a
-        bb
-
-        하면 a까지는 문제없는데 bb에서 a가 bb로 바뀐다???
-    */
-
-    // 문자열 찾기
     for (int i = 0; i < NumberOfFindingData; i++)
     {
+        char *put = malloc(sizeof(char) * WORD_MAX_LENGTH);
         scanf("%s", put);
         trie_search(root, put);
+        free(put);
     }
 
     printData();
