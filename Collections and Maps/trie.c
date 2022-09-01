@@ -17,11 +17,11 @@ z = 122
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
-#define WORD_MAX_LENGTH 21
+#define WORD_MAX_LENGTH 22
 #define ALPHABET 26
 #define EXIST 1
 #define NOTEXIST 0
-#define MAX 500001
+#define MAX 500010
 
 struct TRIE;
 
@@ -40,7 +40,7 @@ typedef struct TRIE
 } trie;
 
 int existCount = 0;
-char sameData[MAX][WORD_MAX_LENGTH] = {0};
+char sameData[MAX][WORD_MAX_LENGTH];
 
 void trie_init(trie *root, int depth)
 {
@@ -122,7 +122,6 @@ void trie_push(trie *root, char *input)
                 trie_push(root->arr[idx]->next, input);
 
                 root->arr[idx]->isExist = NOTEXIST;
-                free(data);
             }
         }
     }
@@ -182,22 +181,8 @@ int compare(const char *a, const char *b)
     return strcmp((char *)a, (char *)b);
 }
 
-int longestData()
-{
-    int longestLen = strlen(sameData[0]);
-    for (int i = 1; i < existCount; i++)
-    {
-        if (longestLen < strlen(sameData[i]))
-        {
-            longestLen = strlen(sameData[i]);
-        }
-    }
-    return longestLen;
-}
-
 void sortData()
 {
-    int len = longestData();
     qsort(sameData, existCount, WORD_MAX_LENGTH, compare);
 }
 
@@ -220,7 +205,6 @@ int main()
     // 문자열을 저장하는 배열
     int NumberOfData;
     int NumberOfFindingData;
-    // char *put = malloc(sizeof(char) * WORD_MAX_LENGTH);
     scanf("%d", &NumberOfData);
     scanf("%d", &NumberOfFindingData);
     for (int i = 0; i < NumberOfData; i++)
@@ -228,7 +212,6 @@ int main()
         char *put = malloc(sizeof(char) * WORD_MAX_LENGTH);
         scanf("%s", put);
         trie_push(root, put);
-        free(put);
     }
 
     for (int i = 0; i < NumberOfFindingData; i++)
@@ -261,6 +244,11 @@ ab
 ad
 ac
 ab
+
+3 3
+aaa
+a
+aa
 
 4 4
 ac
