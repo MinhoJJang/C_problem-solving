@@ -17,6 +17,7 @@ z = 122
 #include <stdlib.h>
 #include <string.h>
 #include <malloc.h>
+
 #define WORD_MAX_LENGTH 22
 #define ALPHABET 26
 #define EXIST 1
