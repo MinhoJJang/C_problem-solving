@@ -1,27 +1,28 @@
 #include <stdio.h>
-#include <stdlib.h> 
-#include <string.h> 
-#pragma warning(disable:4996) 
-#pragma warning(disable:4477) 
+#include <stdlib.h>
+#include <string.h>
+#pragma warning(disable : 4996)
+#pragma warning(disable : 4477)
 
 #define X 0
 #define Y 1
 #define MAX 100005
 
 /*
-±¸Á¶Ã¼ Å¸ÀÔÀÇ ¹è¿­¼±¾ğ ÈÄ ¹è¿­À» Á¤·ÄÇÏ´Â Å°¸¦ ¹Ù²Ù´Â ¹®Á¦
+êµ¬ì¡°ì²´ íƒ€ì…ì˜ ë°°ì—´ì„ ì–¸ í›„ ë°°ì—´ì„ ì •ë ¬í•˜ëŠ” í‚¤ë¥¼ ë°”ê¾¸ëŠ” ë¬¸ì œ
 */
 
-typedef struct _coordinate {
+typedef struct _coordinate
+{
 	int x;
 	int y;
 } cord;
 
-cord inputArr[MAX] = { 0 };
+cord inputArr[MAX] = {0};
 
 // == QuickSort ==
 
-// ¹è¿­ µÎ°³°ª ¹Ù²Ù±â
+// ë°°ì—´ ë‘ê°œê°’ ë°”ê¾¸ê¸°
 void Swap(cord arr[], int idx1, int idx2)
 {
 	cord temp = arr[idx1];
@@ -29,46 +30,49 @@ void Swap(cord arr[], int idx1, int idx2)
 	arr[idx2] = temp;
 }
 
-// ¹è¿­ Á¤·Ä ¿µ¿ª ÂÉ°³±â (ÂÉ°¶ index ¸®ÅÏ)
-int Partition(cord arr[], int left, int right) {
+// ë°°ì—´ ì •ë ¬ ì˜ì—­ ìª¼ê°œê¸° (ìª¼ê°¤ index ë¦¬í„´)
+int Partition(cord arr[], int left, int right)
+{
 
-	int pivot = arr[left].y; // ÇÇ¹şÀÇ À§Ä¡´Â °¡Àå ¿ŞÂÊ! (°ª)
-	int low = left + 1; // low ´Â ÇÇ¹ş ¿À¸¥ÂÊ¿¡¼­ ½ÃÀÛ (index)
-	int high = right; // high ´Â right ºÎÅÍ ½ÃÀÛ (index)
+	int pivot = arr[left].y; // í”¼ë²—ì˜ ìœ„ì¹˜ëŠ” ê°€ì¥ ì™¼ìª½! (ê°’)
+	int low = left + 1;		 // low ëŠ” í”¼ë²— ì˜¤ë¥¸ìª½ì—ì„œ ì‹œì‘ (index)
+	int high = right;		 // high ëŠ” right ë¶€í„° ì‹œì‘ (index)
 
-	// 
-	while (low <= high) {
-		//low ¿ìÃø ÀÌµ¿, pivot º¸´Ù Å« °ÍÀ» ¸¸³¯¶§±îÁö
-		while (arr[low].y <= pivot && low <= high) {
+	//
+	while (low <= high)
+	{
+		// low ìš°ì¸¡ ì´ë™, pivot ë³´ë‹¤ í° ê²ƒì„ ë§Œë‚ ë•Œê¹Œì§€
+		while (arr[low].y <= pivot && low <= high)
+		{
 			low++;
 		}
 
-		// high ÁÂÃø ÀÌµ¿, pivot º¸´Ù ÀÛÀº °ÍÀ» ¸¸³¯¶§±îÁö!
-		// ¿À·ùÀÖ¾úÀ½ (highÀÎµ¥ low¶ó Àû¾ùÀ½)
-		while (arr[high].y >= pivot && high >= (left + 1)) {
+		// high ì¢Œì¸¡ ì´ë™, pivot ë³´ë‹¤ ì‘ì€ ê²ƒì„ ë§Œë‚ ë•Œê¹Œì§€!
+		// ì˜¤ë¥˜ìˆì—ˆìŒ (highì¸ë° lowë¼ ì ì—‡ìŒ)
+		while (arr[high].y >= pivot && high >= (left + 1))
+		{
 			high--;
 		}
 
-		// low¿Í high°¡ ¸ØÃß¸é
-		if (low <= high) // low, high°¡ ±³Â÷µÇÁö ¾ÊÀº »óÅÂ¶ó¸é Swap ÁøÇà
+		// lowì™€ highê°€ ë©ˆì¶”ë©´
+		if (low <= high) // low, highê°€ êµì°¨ë˜ì§€ ì•Šì€ ìƒíƒœë¼ë©´ Swap ì§„í–‰
 			Swap(arr, low, high);
 	}
 
-	// pivot°ú high°¡ °¡¸®Å°´Â ´ë»ó±³È¯
+	// pivotê³¼ highê°€ ê°€ë¦¬í‚¤ëŠ” ëŒ€ìƒêµí™˜
 	Swap(arr, left, high);
 
-	return high; // ¿Å°ÜÁø ÇÇ¹şÀÇ À§Ä¡Á¤º¸ ¸®ÅÏ
+	return high; // ì˜®ê²¨ì§„ í”¼ë²—ì˜ ìœ„ì¹˜ì •ë³´ ë¦¬í„´
 }
 
-
-// Àç±ÍÀûÀ¸·Î ÄüÁ¤·Ä ¼öÇà
+// ì¬ê·€ì ìœ¼ë¡œ í€µì •ë ¬ ìˆ˜í–‰
 void QuickSort(cord arr[], int left, int right)
 {
 	if (left <= right)
 	{
-		int pivot = Partition(arr, left, right); // pivot Á¤ÇÏ°í, µÑ·ÎÂÉ°·
-		QuickSort(arr, left, pivot - 1); // pivot ¿ŞÂÊ¿µ¿ªÀ» ÄüÁ¤·Ä
-		QuickSort(arr, pivot + 1, right); // pivot ¿À¸¥ÂÊ¿µ¿ªÀ»ÄüÁ¤·Ä
+		int pivot = Partition(arr, left, right); // pivot ì •í•˜ê³ , ë‘˜ë¡œìª¼ê°¬
+		QuickSort(arr, left, pivot - 1);		 // pivot ì™¼ìª½ì˜ì—­ì„ í€µì •ë ¬
+		QuickSort(arr, pivot + 1, right);		 // pivot ì˜¤ë¥¸ìª½ì˜ì—­ì„í€µì •ë ¬
 	}
 }
 
@@ -77,14 +81,14 @@ void QuickSortMain(cord arr[], int n)
 	QuickSort(arr, 0, n - 1);
 }
 
-// ==== 
+// ====
 void QuickSort_X(cord arr[], int left, int right)
 {
 	if (left <= right)
 	{
-		int pivot = Partition_X(arr, left, right); // pivot Á¤ÇÏ°í, µÑ·ÎÂÉ°·
-		QuickSort_X(arr, left, pivot - 1); // pivot ¿ŞÂÊ¿µ¿ªÀ» ÄüÁ¤·Ä
-		QuickSort_X(arr, pivot + 1, right); // pivot ¿À¸¥ÂÊ¿µ¿ªÀ»ÄüÁ¤·Ä
+		int pivot = Partition_X(arr, left, right); // pivot ì •í•˜ê³ , ë‘˜ë¡œìª¼ê°¬
+		QuickSort_X(arr, left, pivot - 1);		   // pivot ì™¼ìª½ì˜ì—­ì„ í€µì •ë ¬
+		QuickSort_X(arr, pivot + 1, right);		   // pivot ì˜¤ë¥¸ìª½ì˜ì—­ì„í€µì •ë ¬
 	}
 }
 
@@ -93,70 +97,83 @@ void QuickSortMain_X(cord arr[], int start, int end)
 	QuickSort_X(arr, start, end);
 }
 
-int Partition_X(cord arr[], int left, int right) {
+int Partition_X(cord arr[], int left, int right)
+{
 
-	int pivot = arr[left].x; // ÇÇ¹şÀÇ À§Ä¡´Â °¡Àå ¿ŞÂÊ! (°ª)
-	int low = left + 1; // low ´Â ÇÇ¹ş ¿À¸¥ÂÊ¿¡¼­ ½ÃÀÛ (index)
-	int high = right; // high ´Â right ºÎÅÍ ½ÃÀÛ (index)
+	int pivot = arr[left].x; // í”¼ë²—ì˜ ìœ„ì¹˜ëŠ” ê°€ì¥ ì™¼ìª½! (ê°’)
+	int low = left + 1;		 // low ëŠ” í”¼ë²— ì˜¤ë¥¸ìª½ì—ì„œ ì‹œì‘ (index)
+	int high = right;		 // high ëŠ” right ë¶€í„° ì‹œì‘ (index)
 
-	// 
-	while (low <= high) {
-		//low ¿ìÃø ÀÌµ¿, pivot º¸´Ù Å« °ÍÀ» ¸¸³¯¶§±îÁö
-		while (arr[low].x <= pivot && low <= high) {
+	//
+	while (low <= high)
+	{
+		// low ìš°ì¸¡ ì´ë™, pivot ë³´ë‹¤ í° ê²ƒì„ ë§Œë‚ ë•Œê¹Œì§€
+		while (arr[low].x <= pivot && low <= high)
+		{
 			low++;
 		}
 
-		// high ÁÂÃø ÀÌµ¿, pivot º¸´Ù ÀÛÀº °ÍÀ» ¸¸³¯¶§±îÁö!
-		// ¿À·ùÀÖ¾úÀ½ (highÀÎµ¥ low¶ó Àû¾ùÀ½)
-		while (arr[high].x >= pivot && high >= (left + 1)) {
+		// high ì¢Œì¸¡ ì´ë™, pivot ë³´ë‹¤ ì‘ì€ ê²ƒì„ ë§Œë‚ ë•Œê¹Œì§€!
+		// ì˜¤ë¥˜ìˆì—ˆìŒ (highì¸ë° lowë¼ ì ì—‡ìŒ)
+		while (arr[high].x >= pivot && high >= (left + 1))
+		{
 			high--;
 		}
 
-		// low¿Í high°¡ ¸ØÃß¸é
-		if (low <= high) // low, high°¡ ±³Â÷µÇÁö ¾ÊÀº »óÅÂ¶ó¸é Swap ÁøÇà
+		// lowì™€ highê°€ ë©ˆì¶”ë©´
+		if (low <= high) // low, highê°€ êµì°¨ë˜ì§€ ì•Šì€ ìƒíƒœë¼ë©´ Swap ì§„í–‰
 			Swap(arr, low, high);
 	}
 
-	// pivot°ú high°¡ °¡¸®Å°´Â ´ë»ó±³È¯
+	// pivotê³¼ highê°€ ê°€ë¦¬í‚¤ëŠ” ëŒ€ìƒêµí™˜
 	Swap(arr, left, high);
 
-	return high; // ¿Å°ÜÁø ÇÇ¹şÀÇ À§Ä¡Á¤º¸ ¸®ÅÏ
+	return high; // ì˜®ê²¨ì§„ í”¼ë²—ì˜ ìœ„ì¹˜ì •ë³´ ë¦¬í„´
 }
 // ==Additional Method==
 
-// y°ªÀÌ °°À¸¸é xÁÂÇ¥¸¦ Á¤·ÄÇØ¾ß ÇÏ´Ï±î 
-void x_cord_sort(int N) {
-	for (int i = 0; i < N - 1; i++) {
-		// ¸¸¾à i¹øÂ° y°ª°ú i+1¹ø¤Š y°ªÀÌ °°À¸¸é Á¶»ç ½ÃÀÛ.
-		if (inputArr[i].y == inputArr[i + 1].y) {
-			int startIdx = i; // ½ÃÀÛÀ§Ä¡ 
-			int tempIdx = i + 1; // ÀÓ½ÃÀ§Ä¡¼³Á¤
-			// i+1ºÎÅÍ ¶Ç y°ªÀÌ °°Àº ÁÂÇ¥°¡ ÀÖ´ÂÁö °Ë»ç 
-			while (inputArr[tempIdx].y == inputArr[tempIdx + 1].y) {
+// yê°’ì´ ê°™ìœ¼ë©´ xì¢Œí‘œë¥¼ ì •ë ¬í•´ì•¼ í•˜ë‹ˆê¹Œ
+void x_cord_sort(int N)
+{
+	for (int i = 0; i < N - 1; i++)
+	{
+		// ë§Œì•½ ië²ˆì§¸ yê°’ê³¼ i+1ë²ˆì¨° yê°’ì´ ê°™ìœ¼ë©´ ì¡°ì‚¬ ì‹œì‘.
+		if (inputArr[i].y == inputArr[i + 1].y)
+		{
+			int startIdx = i;	 // ì‹œì‘ìœ„ì¹˜
+			int tempIdx = i + 1; // ì„ì‹œìœ„ì¹˜ì„¤ì •
+			// i+1ë¶€í„° ë˜ yê°’ì´ ê°™ì€ ì¢Œí‘œê°€ ìˆëŠ”ì§€ ê²€ì‚¬
+			while (inputArr[tempIdx].y == inputArr[tempIdx + 1].y)
+			{
 				tempIdx++;
 			}
-			int endIdx = tempIdx; // ´Ù Ã£¾ÒÀ¸¸é ¸¶Áö¸· À§Ä¡¸¦ ¼³Á¤
-			i = endIdx; // endIdx´ÙÀ½ºÎÅÍ ´Ù½Ã Ã£À¸¸é µÇ¹Ç·Î
+			int endIdx = tempIdx; // ë‹¤ ì°¾ì•˜ìœ¼ë©´ ë§ˆì§€ë§‰ ìœ„ì¹˜ë¥¼ ì„¤ì •
+			i = endIdx;			  // endIdxë‹¤ìŒë¶€í„° ë‹¤ì‹œ ì°¾ìœ¼ë©´ ë˜ë¯€ë¡œ
 
-			// ÀÌÁ¦ Á¤·ÄÇÑ´Ù.
+			// ì´ì œ ì •ë ¬í•œë‹¤.
 			QuickSortMain_X(inputArr, startIdx, endIdx);
 		}
 	}
 }
 
-void setData(int N) {
-	for (int i = 0; i < N; i++) {
+void setData(int N)
+{
+	for (int i = 0; i < N; i++)
+	{
 		scanf("%d %d", &inputArr[i].x, &inputArr[i].y);
 	}
 }
 
-void printData(int N) {
-	for (int i = 0; i < N; i++) {
+void printData(int N)
+{
+	for (int i = 0; i < N; i++)
+	{
 		printf("%d %d\n", inputArr[i].x, inputArr[i].y);
 	}
 }
 
-int main() {
+int main()
+{
 
 	int N;
 	scanf("%d", &N);
@@ -164,12 +181,12 @@ int main() {
 	setData(N);
 	QuickSortMain(inputArr, N);
 
-	// ÀÌ»óÅÂÀÇ ¹è¿­¿¡¼­ y°ªÀÌ °°Àº°Ô ÀÖ´ÂÁö Á¶»ç 
+	// ì´ìƒíƒœì˜ ë°°ì—´ì—ì„œ yê°’ì´ ê°™ì€ê²Œ ìˆëŠ”ì§€ ì¡°ì‚¬
 	x_cord_sort(N);
 
 	printData(N);
 
 	return 0;
-} // ¸Â¾Ò½À´Ï´Ù! 
+} // ë§ì•˜ìŠµë‹ˆë‹¤!
 
-// 11650ÀÌ¶û ¶È°°Àº¹®Á¦ÀÓ ±×³É
+// 11650ì´ë‘ ë˜‘ê°™ì€ë¬¸ì œì„ ê·¸ëƒ¥
