@@ -19,7 +19,7 @@ z = 122
 #include <malloc.h>
 
 #define WORD_MAX_LENGTH 22
-#define ALPHABET 26
+#define ALPHABET 27
 #define EXIST 1
 #define NOTEXIST 0
 #define MAX 500010
@@ -133,6 +133,7 @@ void trie_search(trie *root, char *search)
     // 해당 영단어가 있는지 확인하려면, 영단어의 각 단어마다 trie가 연결되어 있는지 확인하면 된다.
     int len = strlen(search);
     int idx = search[root->depth] - 97;
+    // ?? 여기서 Segfault????????
 
     // 일단, arr이 NULL이 아니어야 한다. NULL이라면 바로 컷
     if (root->arr[idx] == NULL)
@@ -212,6 +213,7 @@ int main()
     {
         char *put = malloc(sizeof(char) * WORD_MAX_LENGTH);
         scanf("%s", put);
+
         trie_push(root, put);
     }
 
@@ -260,4 +262,11 @@ ac
 acb
 ab
 aaa
+
+4 5
+a
+ab
+abb
+aba
+abab
 */
