@@ -1,4 +1,6 @@
 /*
+https://www.acmicpc.net/problem/1764
+
 영단어 모음을 저장하는 trie를 만들자.
 
 영단어는 26개의 알파벳으로 구성되어 있으므로, trie의 root는 26개의 알파벳으로 이루어진다.
@@ -132,8 +134,15 @@ void trie_search(trie *root, char *search)
 {
     // 해당 영단어가 있는지 확인하려면, 영단어의 각 단어마다 trie가 연결되어 있는지 확인하면 된다.
     int len = strlen(search);
+
+    // 해결코드. root가 null일 경우 배제해야한다.
+    if (root == NULL)
+    {
+        return;
+    }
+
     int idx = search[root->depth] - 97;
-    // ?? 여기서 Segfault????????
+    // 에러의 원인
 
     // 일단, arr이 NULL이 아니어야 한다. NULL이라면 바로 컷
     if (root->arr[idx] == NULL)
@@ -229,6 +238,7 @@ int main()
 
     return 0;
 }
+// 맞았습니다!!
 
 // 3 4
 // abbbc
