@@ -1,104 +1,114 @@
 #include <stdio.h>
-#include <stdlib.h> 
-#include <string.h> 
-#pragma warning(disable:4996) 
-#pragma warning(disable:4477) 
+#include <stdlib.h>
+#include <string.h>
+#pragma warning(disable : 4996)
+#pragma warning(disable : 4477)
 #define MAX_LENGTH 10005
 #define SIZE 2750
 
 char fibo[MAX_LENGTH][SIZE];
 
-// ¼ö¸¦ Æ¯Á¤ÇÑ ¹è¿­¿¡ ´ã´Â´Ù. ÀÌ¶§ ÀÌÂ÷¿ø ¹è¿­·Î 0¹øÂ° ÇÇº¸³ªÄ¡ ¼ö´Â arr[0]¿¡ ´ã°í, 1¹øÂ° ¼ö´Â arr[1]¿¡ ´ã°í...ÀÌ·±½ÄÀ¸·Î..!
-int sizeArr(int N) {
+// ìˆ˜ë¥¼ íŠ¹ì •í•œ ë°°ì—´ì— ë‹´ëŠ”ë‹¤. ì´ë•Œ ì´ì°¨ì› ë°°ì—´ë¡œ 0ë²ˆì§¸ í”¼ë³´ë‚˜ì¹˜ ìˆ˜ëŠ” arr[0]ì— ë‹´ê³ , 1ë²ˆì§¸ ìˆ˜ëŠ” arr[1]ì— ë‹´ê³ ...ì´ëŸ°ì‹ìœ¼ë¡œ..!
+int sizeArr(int N)
+{
 
-	if (N == 0) {
+	if (N == 0)
+	{
 		return 0;
 	}
 
 	int cnt = 0;
 	int i = 0;
 
-	if (N == 200) {
-
+	if (N == 200)
+	{
 	}
 
-	while (fibo[N][i] != '\0') {
+	while (fibo[N][i] != '\0')
+	{
 		i++;
 		cnt++;
 	}
 
-	return cnt-1;
+	return cnt - 1;
 }
 
-char fn(int N, int FirstN) {
+char fn(int N, int FirstN)
+{
 
-	char isTen[SIZE][1] = { 0 };
+	char isTen[SIZE][1] = {0};
 
-	if (N == 0) {
+	if (N == 0)
+	{
 		fibo[N][0] = '0';
 	}
-	else if (N == 1) {
+	else if (N == 1)
+	{
 		fibo[N][0] = '1';
 	}
-	else {
+	else
+	{
 
-		
 		int lengthCount = 0;
 
-		// ´õÇÏ·Á´Â ¹®ÀÚ¿­ÀÇ ±æÀÌÆÄ¾Ç. 
+		// ë”í•˜ë ¤ëŠ” ë¬¸ìžì—´ì˜ ê¸¸ì´íŒŒì•….
 		int lengthOfArr1 = sizeArr(N - 1);
 		int lengthOfArr2 = sizeArr(N - 2);
-		// Arr1 >= Arr2 
+		// Arr1 >= Arr2
 		int save = lengthOfArr1;
 
-		// ±æÀÌ°¡ ´õ ±ä ¹è¿­ÀÇ 0¹øÂ°¸¦ ÂüÁ¶ÇÏ°í ³­ µÚ¿¡´Â ´õÇÒ ¼ö ¾øÀ½
-		// ÇÏÁö¸¸ ¸¸¾à 5+8 = 13ÀÌ·± °æ¿ì¶ó¸é..?
-		while (lengthOfArr1>=0) {
-							
+		// ê¸¸ì´ê°€ ë” ê¸´ ë°°ì—´ì˜ 0ë²ˆì§¸ë¥¼ ì°¸ì¡°í•˜ê³  ë‚œ ë’¤ì—ëŠ” ë”í•  ìˆ˜ ì—†ìŒ
+		// í•˜ì§€ë§Œ ë§Œì•½ 5+8 = 13ì´ëŸ° ê²½ìš°ë¼ë©´..?
+		while (lengthOfArr1 >= 0)
+		{
+
 			int check = 0;
-			
-			if (lengthOfArr2 >= 0) {
-			
+
+			if (lengthOfArr2 >= 0)
+			{
+
 				check = fibo[N - 1][lengthOfArr1] + fibo[N - 2][lengthOfArr2] + isTen[lengthCount][0] - '0' - '0';
 			}
-			else {
+			else
+			{
 				check = fibo[N - 1][lengthOfArr1] + isTen[lengthCount][0] - '0';
 			}
-			
-			if (isTen[lengthCount][0] == '1') {
+
+			if (isTen[lengthCount][0] == '1')
+			{
 				check -= '0';
 			}
 
-			// ´õÇÑ °ªÀÌ 10À» ³ÑÁö ¾ÊÀ¸¸é
-			if (check < 10) {
-				fibo[N][lengthOfArr1+1] = check + '0' ;
+			// ë”í•œ ê°’ì´ 10ì„ ë„˜ì§€ ì•Šìœ¼ë©´
+			if (check < 10)
+			{
+				fibo[N][lengthOfArr1 + 1] = check + '0';
 			}
-			// 10À» ³ÑÀ¸¸é 
-			else {
-				// ¸¸¾à ÀÚ¸®¼ö°¡ °°¾Ò´Âµ¥ ´õÇßÀ» ‹š ÃÑ ÀÚ¸®¼ö°¡ ´Ã¾î³ª¸é...?
-				isTen[lengthCount + 1][0] = '1'; // ´ÙÀ½ ¼ýÀÚ 10ÀÇÀÚ¸®¼ö ¿Ã·ÁÁÖ°í
+			// 10ì„ ë„˜ìœ¼ë©´
+			else
+			{
+				// ë§Œì•½ ìžë¦¬ìˆ˜ê°€ ê°™ì•˜ëŠ”ë° ë”í–ˆì„ ë–„ ì´ ìžë¦¬ìˆ˜ê°€ ëŠ˜ì–´ë‚˜ë©´...?
+				isTen[lengthCount + 1][0] = '1'; // ë‹¤ìŒ ìˆ«ìž 10ì˜ìžë¦¬ìˆ˜ ì˜¬ë ¤ì£¼ê³ 
 				fibo[N][lengthOfArr1 + 1] = check - 10 + '0';
-				
 			}
-
 
 			lengthOfArr1--;
 			lengthOfArr2--;
 
 			lengthCount++;
-
-			
-
 		}
 
-		// ´õÇÑ ¼ýÀÚÀÇ ÀÚ¸®¼ö°¡ °°°í, ´ä¾ÈÀÇ ÀÚ¸®¼ö°¡ 1 ´Ã¾î³µ´Ù¸é
-		if (lengthOfArr1 == -1 && isTen[lengthCount][0] == '1') {
+		// ë”í•œ ìˆ«ìžì˜ ìžë¦¬ìˆ˜ê°€ ê°™ê³ , ë‹µì•ˆì˜ ìžë¦¬ìˆ˜ê°€ 1 ëŠ˜ì–´ë‚¬ë‹¤ë©´
+		if (lengthOfArr1 == -1 && isTen[lengthCount][0] == '1')
+		{
 			fibo[N][0] = '1';
 		}
-		// ¸¸¾à ÀüºÎ ´õÇÑ °ªÀÌ ÀÚ¸®¼ö°¡ º¯ÇÏÁö ¾Ê¾Ò´Ù¸é
-		else {
+		// ë§Œì•½ ì „ë¶€ ë”í•œ ê°’ì´ ìžë¦¬ìˆ˜ê°€ ë³€í•˜ì§€ ì•Šì•˜ë‹¤ë©´
+		else
+		{
 			int k = 0;
-			while (k <= save) {
+			while (k <= save)
+			{
 				fibo[N][k] = fibo[N][k + 1];
 				k++;
 			}
@@ -106,27 +116,30 @@ char fn(int N, int FirstN) {
 		}
 	}
 
-	if (N == FirstN) {
+	if (N == FirstN)
+	{
 		return 0;
 	}
 
 	return fn(N + 1, FirstN);
 }
 
-int main() {
+int main()
+{
 
 	int N;
-	
+
 	scanf("%d", &N);
 	fn(0, N);
 
 	int i = 0;
-	while(fibo[N][i] != 0){ 
+	while (fibo[N][i] != 0)
+	{
 		printf("%c", fibo[N][i]);
 		i++;
 	}
 
 	return 0;
 }
-// 200ÃÊ°ú¿¡¼­ ·£´ýÇÏ°Ô Á×´Âµ¥ ¿Ö Á×À»±î
-// ¾Æ´Ï ¹éÁØ ÄÄÆÄÀÏ·¯¿¡¼­´Â µÇ´Âµ¥ ??????????¤»¤»¤»¾Æ 
+// 200ì´ˆê³¼ì—ì„œ ëžœë¤í•˜ê²Œ ì£½ëŠ”ë° ì™œ ì£½ì„ê¹Œ
+// ì•„ë‹ˆ ë°±ì¤€ ì»´íŒŒì¼ëŸ¬ì—ì„œëŠ” ë˜ëŠ”ë° ??????????ã…‹ã…‹ã…‹ì•„

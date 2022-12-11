@@ -45,18 +45,18 @@ unlong mainFn(int n, int k) {
 	return arr[n][k];
 }
 
-int n;
+int QueenToBePlaced;
 int k;
 
 void putData() {
-	scanf("%d %d", &n, &k);
+	scanf("%d %d", &QueenToBePlaced, &k);
 }
 
 int main() {
 
 	putData();
 
-	int answer = mainFn(n, k);
+	int answer = mainFn(QueenToBePlaced, k);
 	printf("%d", answer);
 
 	return 0;

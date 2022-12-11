@@ -16,7 +16,7 @@ nCm 의 끝자리 $0$의 개수를 출력하는 프로그램을 작성하시오.
 nCm 이니까, n의 5개수 - (m의 5개수 + n-m의 5개수)
 물론 2의 개수도 세야됨 
 */
-int n;
+int QueenToBePlaced;
 int m;
 
 int numberOfZero_five(int a) {
@@ -44,7 +44,7 @@ int numberOfZero_two(int b) {
 
 
 void putData() {
-	scanf("%d %d", &n, &m);
+	scanf("%d %d", &QueenToBePlaced, &m);
 }
 
 int returnSmallOne(int a, int b) {
@@ -59,9 +59,9 @@ void fn() {
 	int five = 0;
 	int two = 0;
 
-	five = numberOfZero_five(n) - (numberOfZero_five(m) + numberOfZero_five(n - m));
+	five = numberOfZero_five(QueenToBePlaced) - (numberOfZero_five(m) + numberOfZero_five(QueenToBePlaced - m));
 
-	two = numberOfZero_two(n) - (numberOfZero_two(m) + numberOfZero_two(n - m));
+	two = numberOfZero_two(QueenToBePlaced) - (numberOfZero_two(m) + numberOfZero_two(QueenToBePlaced - m));
 
 	printf("%d",returnSmallOne(five, two));
 }

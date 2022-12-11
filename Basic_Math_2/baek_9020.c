@@ -35,7 +35,7 @@
 
 #define MAX 10005
 
-int n;
+int QueenToBePlaced;
 int arr[MAX] = { PRIME }; // 전부 PRIME 이라고 가정 
 int num[MAX] = { 0 };
 int numIdx = 0;
@@ -45,9 +45,9 @@ int ansIdx = 0;
 
 void putData() {
     
-    scanf("%d", &n);
+    scanf("%d", &QueenToBePlaced);
 
-	for (numIdx=0; numIdx<n; numIdx++) {
+	for (numIdx=0; numIdx<QueenToBePlaced; numIdx++) {
 		scanf("%d", &num[numIdx]);
 	}
 }

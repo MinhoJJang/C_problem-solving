@@ -20,14 +20,14 @@
 #define FALSE 0
 
 int arr[MAX] = { 0 };
-int n;
+int QueenToBePlaced;
 
 // 데이터값 넣기 
 void putData() {
 
-	scanf("%d", &n);
+	scanf("%d", &QueenToBePlaced);
 
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < QueenToBePlaced; i++) {
 		scanf("%d", &arr[i]);
 	}
 }
@@ -118,7 +118,7 @@ void printAns(int n) {
 int main() {
 
 	putData();
-	printAns(n);
+	printAns(QueenToBePlaced);
 
 	return 0;
 } // 맞았습니다!
